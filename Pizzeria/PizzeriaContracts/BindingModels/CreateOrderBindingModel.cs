@@ -3,7 +3,7 @@
     /// <summary>
     /// Данные от клиента, для создания заказа
     /// </summary>   
-    class CreateOrderBindingModel
+    public class CreateOrderBindingModel
     {
         public int ProductId { get; set; }
 

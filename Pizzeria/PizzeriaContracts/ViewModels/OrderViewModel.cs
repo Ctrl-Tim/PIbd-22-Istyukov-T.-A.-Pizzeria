@@ -6,7 +6,7 @@ namespace PizzeriaContracts.ViewModels
     /// <summary>
     /// Заказ
     /// </summary> 
-    class OrderViewModel
+    public class OrderViewModel
     {
         public int Id { get; set; }
 

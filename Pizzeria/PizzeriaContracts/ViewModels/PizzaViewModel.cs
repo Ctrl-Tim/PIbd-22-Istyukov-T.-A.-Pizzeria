@@ -6,7 +6,7 @@ namespace PizzeriaContracts.ViewModels
     /// <summary>
     /// Пицца, изготавливаемая в пиццерии
     /// </summary> 
-    class PizzaViewModel
+    public class PizzaViewModel
     {
         public int Id { get; set; }
 

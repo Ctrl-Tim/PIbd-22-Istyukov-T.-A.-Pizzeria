@@ -3,9 +3,9 @@
 namespace PizzeriaContracts.ViewModels
 {
     /// <summary>
-    /// Игредиент, требуемый для изготовления изделия
+    /// Игредиент, требуемый для изготовления пиццы
     /// </summary> 
-    class IngredientViewModel
+    public class IngredientViewModel
     {
         public int Id { get; set; }
 

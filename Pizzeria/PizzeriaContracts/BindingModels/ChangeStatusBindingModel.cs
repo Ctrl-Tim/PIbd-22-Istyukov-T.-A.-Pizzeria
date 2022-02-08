@@ -3,7 +3,7 @@
     /// <summary>
     /// Данные для смены статуса заказа
     /// <summary>
-    class ChangeStatusBindingModel
+    public class ChangeStatusBindingModel
     {
         public int OrderId { get; set; }
     }

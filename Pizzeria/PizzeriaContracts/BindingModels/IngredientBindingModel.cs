@@ -1,9 +1,9 @@
 ﻿namespace PizzeriaContracts.BindingModels
 {
     /// <summary>
-    /// Игредиент, требуемый для изготовления изделия
+    /// Игредиент, требуемый для изготовления пиццы
     /// </summary>   
-    class IngredientBindingModel
+    public class IngredientBindingModel
     {
         public int? Id { get; set; }
 

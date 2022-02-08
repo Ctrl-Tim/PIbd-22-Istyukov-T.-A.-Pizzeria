@@ -5,7 +5,7 @@ namespace PizzeriaContracts.BindingModels
     /// <summary>
     /// Пицца, изготавливаемая в пиццерии
     /// </summary> 
-    class PizzaBindingModel
+    public class PizzaBindingModel
     {
         public int? Id { get; set; }
 

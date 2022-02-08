@@ -6,7 +6,7 @@ namespace PizzeriaContracts.BindingModels
     /// <summary>
     /// Заказ
     /// </summary>
-    class OrderBindingModel
+    public class OrderBindingModel
     {
         public int? Id { get; set; }
 
