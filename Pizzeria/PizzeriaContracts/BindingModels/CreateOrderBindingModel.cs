@@ -5,7 +5,9 @@
     /// </summary>   
     public class CreateOrderBindingModel
     {
-        public int ProductId { get; set; }
+        public int PizzaId { get; set; }
+        
+        public string PizzaName { get; set; }
 
         public int Count { get; set; }
 

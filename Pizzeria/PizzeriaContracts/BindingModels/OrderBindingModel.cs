@@ -12,6 +12,8 @@ namespace PizzeriaContracts.BindingModels
 
         public int PizzaId { get; set; }
 
+        public string PizzaName { get; set; }
+
         public int Count { get; set; }
 
         public decimal Sum { get; set; }

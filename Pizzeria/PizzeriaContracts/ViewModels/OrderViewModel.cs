@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using PizzeriaContracts.Enums;
 
 namespace PizzeriaContracts.ViewModels
 {
@@ -22,7 +23,7 @@ namespace PizzeriaContracts.ViewModels
         public decimal Sum { get; set; }
 
         [DisplayName("Статус")]
-        public string Status { get; set; }
+        public OrderStatus Status { get; set; }
 
         [DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }
