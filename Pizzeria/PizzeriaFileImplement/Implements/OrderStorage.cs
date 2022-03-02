@@ -110,7 +110,6 @@ namespace PizzeriaFileImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.PizzaId = model.PizzaId;
-            order.PizzaName = model.PizzaName;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -121,11 +120,21 @@ namespace PizzeriaFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
+            string PizzaName = null;
+            foreach (var document in source.Pizzas)
+            {
+                if (document.Id == order.PizzaId)
+                {
+                    PizzaName = document.PizzaName;
+                    break;
+                }
+            }
+
             return new OrderViewModel
             {
                 Id = order.Id,
                 PizzaId = order.PizzaId,
-                PizzaName = order.PizzaName,
+                PizzaName = PizzaName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,

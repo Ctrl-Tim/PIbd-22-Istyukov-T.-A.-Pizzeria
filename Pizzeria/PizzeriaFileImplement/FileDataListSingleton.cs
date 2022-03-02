@@ -103,7 +103,6 @@ namespace PizzeriaFileImplement
                         {
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
                             PizzaId = Convert.ToInt32(elem.Element("PizzaId").Value),
-                            PizzaName = elem.Element("PizzaName").Value,
                             Count = Convert.ToInt32(elem.Element("Count").Value),
                             Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                             Status = status,
@@ -116,7 +115,6 @@ namespace PizzeriaFileImplement
                         {
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
                             PizzaId = Convert.ToInt32(elem.Element("PizzaId").Value),
-                            PizzaName = elem.Element("PizzaName").Value,
                             Count = Convert.ToInt32(elem.Element("Count").Value),
                             Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                             Status = status,
@@ -188,7 +186,6 @@ namespace PizzeriaFileImplement
                     xElement.Add(new XElement("Order",
                  new XAttribute("Id", order.Id),
                  new XElement("PizzaId", order.PizzaId),
-                 new XElement("PizzaName", order.PizzaName),
                  new XElement("Count", order.Count),
                  new XElement("Sum", order.Sum),
                  new XElement("Status", order.Status),
