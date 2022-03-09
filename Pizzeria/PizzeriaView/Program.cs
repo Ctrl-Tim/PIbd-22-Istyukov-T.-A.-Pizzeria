@@ -1,8 +1,7 @@
 using PizzeriaBusinessLogic.BusinessLogics;
 using PizzeriaContracts.BusinessLogicsContracts;
 using PizzeriaContracts.StoragesContracts;
-using PizzeriaFileImplement.Implements;
-using PizzeriaFileImplement;
+using PizzeriaDatabaseImplement.Implements;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -25,7 +24,6 @@ namespace PizzeriaView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
-            FileDataListSingleton.Save();
         }
 
         private static IUnityContainer BuildUnityContainer()
