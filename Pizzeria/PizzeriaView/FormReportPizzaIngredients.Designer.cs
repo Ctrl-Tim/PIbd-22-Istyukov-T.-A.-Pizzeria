@@ -86,7 +86,7 @@ namespace PizzeriaView
             this.Controls.Add(this.ButtonSaveToExcel);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormReportPizzaIngredients";
-            this.Text = "Ингредиенты по пицаам";
+            this.Text = "Ингредиенты по пиццам";
             this.Load += new System.EventHandler(this.FormReportPizzaIngredients_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

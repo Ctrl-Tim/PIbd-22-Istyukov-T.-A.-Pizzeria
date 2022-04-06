@@ -85,7 +85,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                     PizzaName = x.PizzaName,
                     Count = x.Count,
                     Sum = x.Sum,
-                    Status = x.Status
+                    Status = x.Status.ToString()
                 })
                 .ToList();
         } 

@@ -53,7 +53,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 throw new Exception("Не найден заказ");
             }
 
-            if (order.Status != OrderStatus.Принят)
+            if (order.Status != OrderStatus.Принят.ToString())
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
@@ -79,7 +79,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 throw new Exception("Не найден заказ");
             }
 
-            if (order.Status != OrderStatus.Выполняется)
+            if (order.Status != OrderStatus.Выполняется.ToString())
             {
                 throw new Exception("Заказ не в статусе \"Выполняется\"");
             }
@@ -103,7 +103,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
             {
                 throw new Exception("Не найден заказ");
             }
-            if (order.Status != OrderStatus.Готов)
+            if (order.Status != OrderStatus.Готов.ToString())
             {
                 throw new Exception("Заказ не в статусе \"Готов\"");
             }

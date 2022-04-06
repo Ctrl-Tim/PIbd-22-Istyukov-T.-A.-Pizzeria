@@ -23,7 +23,7 @@ namespace PizzeriaDatabaseImplement.Implements
                     PizzaName = rec.Pizza.PizzaName,
                     Count = rec.Count,
                     Sum = rec.Sum,
-                    Status = rec.Status,
+                    Status = rec.Status.ToString(),
                     DateCreate = rec.DateCreate,
                     DateImplement = rec.DateImplement
 
@@ -45,7 +45,7 @@ namespace PizzeriaDatabaseImplement.Implements
                 PizzaName = rec.Pizza.PizzaName,
                 Count = rec.Count,
                 Sum = rec.Sum,
-                Status = rec.Status,
+                Status = rec.Status.ToString(),
                 DateCreate = rec.DateCreate,
                 DateImplement = rec.DateImplement
             }).ToList();
@@ -113,7 +113,7 @@ namespace PizzeriaDatabaseImplement.Implements
                 PizzaName = context.Pizzas.FirstOrDefault(rec => rec.Id == order.PizzaId)?.PizzaName,
                 Count = order.Count,
                 Sum = order.Sum,
-                Status = order.Status,
+                Status = order.Status.ToString(),
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement
             };
