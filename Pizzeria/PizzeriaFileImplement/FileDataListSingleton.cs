@@ -275,8 +275,8 @@ namespace PizzeriaFileImplement
                     }
                     xElement.Add(new XElement("Storage",
                         new XAttribute("Id", storage.Id),
-                        new XElement("WarehouseName", storage.StorageName),
-                        new XElement("Responsible", storage.StorageManager),
+                        new XElement("StorageName", storage.StorageName),
+                        new XElement("StorageManager", storage.StorageManager),
                         new XElement("DateCreate", storage.DateCreate.ToString()),
                         ingrElement));
                 }

@@ -49,7 +49,7 @@ namespace PizzeriaFileImplement.Implements
 
         public void Insert(StorageBindingModel model)
         {
-            int maxId = source.Pizzas.Count > 0 ? source.Ingredients.Max(rec => rec.Id) : 0;
+            int maxId = source.Storages.Count > 0 ? source.Ingredients.Max(rec => rec.Id) : 0;
             var element = new Storage { Id = maxId + 1, StorageIngredients = new Dictionary<int, int>() };
             source.Storages.Add(CreateModel(model, element));
         }

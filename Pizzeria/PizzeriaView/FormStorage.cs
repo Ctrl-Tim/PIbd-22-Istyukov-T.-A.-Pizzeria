@@ -10,9 +10,6 @@ namespace PizzeriaView
 {
     public partial class FormStorage : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-
         public int Id { set { id = value; } }
 
         private readonly IStorageLogic logic;
@@ -65,6 +62,7 @@ namespace PizzeriaView
                         textBoxName.Text = view.StorageName;
                         textBoxManager.Text = view.StorageManager;
                         storageIngredients = view.StorageIngredients;
+
                         LoadData();
                     }
                 }
