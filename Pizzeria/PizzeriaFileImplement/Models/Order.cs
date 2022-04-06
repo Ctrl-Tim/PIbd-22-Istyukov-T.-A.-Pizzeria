@@ -1,11 +1,8 @@
 ﻿using System;
 using PizzeriaContracts.Enums;
 
-namespace PizzeriaListImplement.Models
+namespace PizzeriaFileImplement.Models
 {
-    /// <summary>
-    /// Заказ
-    /// </summary> 
     public class Order
     {
         public int Id { get; set; }

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PizzeriaBusinessLogic\PizzeriaBusinessLogic.csproj" />
+    <ProjectReference Include="..\PizzeriaFileImplement\PizzeriaFileImplement.csproj" />
     <ProjectReference Include="..\PizzeriaListImplement\PizzeriaListImplement.csproj" />
   </ItemGroup>
 
