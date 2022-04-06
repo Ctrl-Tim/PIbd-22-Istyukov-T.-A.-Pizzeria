@@ -8,9 +8,6 @@ namespace PizzeriaView
 {
     public partial class FormStorages : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-
         private readonly IStorageLogic logic;
 
         public FormStorages(IStorageLogic logic)
@@ -44,7 +41,7 @@ namespace PizzeriaView
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormStorage>();
+            var form = Program.Container.Resolve<FormStorage>();
 
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -56,7 +53,7 @@ namespace PizzeriaView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormStorage>();
+                var form = Program.Container.Resolve<FormStorage>();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
 
                 if (form.ShowDialog() == DialogResult.OK)

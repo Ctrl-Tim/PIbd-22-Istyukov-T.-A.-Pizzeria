@@ -11,5 +11,7 @@ namespace PizzeriaContracts.BusinessLogicsContracts
         void CreateOrUpdate(StorageBindingModel model);
 
         void Delete(StorageBindingModel model);
+
+        void Replenishment(ReplenishStorageBindingModel model, int ingredientId, int Count);
     }
 }

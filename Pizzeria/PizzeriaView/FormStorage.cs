@@ -35,13 +35,13 @@ namespace PizzeriaView
                 {
                     dataGridView.Rows.Clear();
 
-                    foreach (var storageMaterial in storageIngredients)
+                    foreach (var storageIngredient in storageIngredients)
                     {
                         dataGridView.Rows.Add(new object[]
                         {
-                            storageMaterial.Key,
-                            storageMaterial.Value.Item1,
-                            storageMaterial.Value.Item2
+                            storageIngredient.Key,
+                            storageIngredient.Value.Item1,
+                            storageIngredient.Value.Item2
                         });
                     }
                 }
@@ -58,10 +58,7 @@ namespace PizzeriaView
             {
                 try
                 {
-                    StorageViewModel view = logic.Read(new StorageBindingModel
-                    {
-                        Id = id.Value
-                    })?[0];
+                    StorageViewModel view = logic.Read(new StorageBindingModel{ Id = id.Value })?[0];
 
                     if (view != null)
                     {
@@ -103,6 +100,7 @@ namespace PizzeriaView
                     Id = id,
                     StorageName = textBoxName.Text,
                     StorageManager = textBoxManager.Text,
+                    DateCreate = DateTime.Now,
                     StorageIngredients = storageIngredients
                 });
 

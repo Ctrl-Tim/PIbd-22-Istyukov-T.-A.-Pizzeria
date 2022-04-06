@@ -74,14 +74,14 @@ namespace PizzeriaBusinessLogic.BusinessLogics
             _storageStorage.Delete(model);
         }
 
-        public void Replenishment(ReplenishStorageBindingModel model)
+        public void Replenishment(ReplenishStorageBindingModel model, int ingredientId, int Count)
         {
             var storage = _storageStorage.GetElement(new StorageBindingModel
             {
                 Id = model.StorageId
             });
 
-            var material = _ingredientStorage.GetElement(new IngredientBindingModel
+            var ingredient = _ingredientStorage.GetElement(new IngredientBindingModel
             {
                 Id = model.IngredientId
             });
@@ -91,18 +91,18 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 throw new Exception("Не найден склад");
             }
 
-            if (material == null)
+            if (ingredient == null)
             {
                 throw new Exception("Не найден материал");
             }
 
             if (storage.StorageIngredients.ContainsKey(model.IngredientId))
             {
-                storage.StorageIngredients[model.IngredientId] = (material.IngredientName, storage.StorageIngredients[model.IngredientId].Item2 + model.Count);
+                storage.StorageIngredients[model.IngredientId] = (ingredient.IngredientName, storage.StorageIngredients[model.IngredientId].Item2 + Count);
             }
             else
             {
-                storage.StorageIngredients.Add(material.Id, (material.IngredientName, model.Count));
+                storage.StorageIngredients.Add(ingredient.Id, (ingredient.IngredientName, model.Count));
             }
 
             _storageStorage.Update(new StorageBindingModel
