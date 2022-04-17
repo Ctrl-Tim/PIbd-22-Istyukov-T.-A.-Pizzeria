@@ -37,12 +37,14 @@ namespace PizzeriaView
             this.labelPizza = new System.Windows.Forms.Label();
             this.labelCount = new System.Windows.Forms.Label();
             this.labelSum = new System.Windows.Forms.Label();
+            this.labelClient = new System.Windows.Forms.Label();
+            this.comboBoxClient = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // comboBoxPizza
             // 
             this.comboBoxPizza.FormattingEnabled = true;
-            this.comboBoxPizza.Location = new System.Drawing.Point(92, 12);
+            this.comboBoxPizza.Location = new System.Drawing.Point(92, 45);
             this.comboBoxPizza.Name = "comboBoxPizza";
             this.comboBoxPizza.Size = new System.Drawing.Size(286, 23);
             this.comboBoxPizza.TabIndex = 0;
@@ -51,7 +53,7 @@ namespace PizzeriaView
             // textBoxCount
             // 
             this.textBoxCount.AcceptsTab = true;
-            this.textBoxCount.Location = new System.Drawing.Point(92, 41);
+            this.textBoxCount.Location = new System.Drawing.Point(92, 74);
             this.textBoxCount.Name = "textBoxCount";
             this.textBoxCount.Size = new System.Drawing.Size(286, 23);
             this.textBoxCount.TabIndex = 1;
@@ -60,14 +62,14 @@ namespace PizzeriaView
             // textBoxSum
             // 
             this.textBoxSum.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBoxSum.Location = new System.Drawing.Point(92, 71);
+            this.textBoxSum.Location = new System.Drawing.Point(92, 104);
             this.textBoxSum.Name = "textBoxSum";
             this.textBoxSum.Size = new System.Drawing.Size(286, 23);
             this.textBoxSum.TabIndex = 2;
             // 
             // ButtonCancel
             // 
-            this.ButtonCancel.Location = new System.Drawing.Point(287, 100);
+            this.ButtonCancel.Location = new System.Drawing.Point(287, 133);
             this.ButtonCancel.Name = "ButtonCancel";
             this.ButtonCancel.Size = new System.Drawing.Size(91, 33);
             this.ButtonCancel.TabIndex = 3;
@@ -77,7 +79,7 @@ namespace PizzeriaView
             // 
             // ButtonSave
             // 
-            this.ButtonSave.Location = new System.Drawing.Point(190, 100);
+            this.ButtonSave.Location = new System.Drawing.Point(190, 133);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(91, 33);
             this.ButtonSave.TabIndex = 4;
@@ -89,7 +91,7 @@ namespace PizzeriaView
             // 
             this.labelPizza.AutoSize = true;
             this.labelPizza.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelPizza.Location = new System.Drawing.Point(8, 13);
+            this.labelPizza.Location = new System.Drawing.Point(8, 46);
             this.labelPizza.Name = "labelPizza";
             this.labelPizza.Size = new System.Drawing.Size(48, 17);
             this.labelPizza.TabIndex = 5;
@@ -99,7 +101,7 @@ namespace PizzeriaView
             // 
             this.labelCount.AutoSize = true;
             this.labelCount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCount.Location = new System.Drawing.Point(8, 44);
+            this.labelCount.Location = new System.Drawing.Point(8, 77);
             this.labelCount.Name = "labelCount";
             this.labelCount.Size = new System.Drawing.Size(81, 17);
             this.labelCount.TabIndex = 6;
@@ -109,17 +111,37 @@ namespace PizzeriaView
             // 
             this.labelSum.AutoSize = true;
             this.labelSum.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSum.Location = new System.Drawing.Point(8, 73);
+            this.labelSum.Location = new System.Drawing.Point(8, 106);
             this.labelSum.Name = "labelSum";
             this.labelSum.Size = new System.Drawing.Size(50, 17);
             this.labelSum.TabIndex = 7;
             this.labelSum.Text = "Сумма:";
             // 
+            // labelClient
+            // 
+            this.labelClient.AutoSize = true;
+            this.labelClient.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelClient.Location = new System.Drawing.Point(8, 16);
+            this.labelClient.Name = "labelClient";
+            this.labelClient.Size = new System.Drawing.Size(52, 17);
+            this.labelClient.TabIndex = 8;
+            this.labelClient.Text = "Клиент:";
+            // 
+            // comboBoxClient
+            // 
+            this.comboBoxClient.FormattingEnabled = true;
+            this.comboBoxClient.Location = new System.Drawing.Point(92, 15);
+            this.comboBoxClient.Name = "comboBoxClient";
+            this.comboBoxClient.Size = new System.Drawing.Size(286, 23);
+            this.comboBoxClient.TabIndex = 9;
+            // 
             // FormCreateOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 145);
+            this.ClientSize = new System.Drawing.Size(390, 177);
+            this.Controls.Add(this.comboBoxClient);
+            this.Controls.Add(this.labelClient);
             this.Controls.Add(this.labelSum);
             this.Controls.Add(this.labelCount);
             this.Controls.Add(this.labelPizza);
@@ -146,5 +168,7 @@ namespace PizzeriaView
         private System.Windows.Forms.Label labelPizza;
         private System.Windows.Forms.Label labelCount;
         private System.Windows.Forms.Label labelSum;
+        private System.Windows.Forms.Label labelClient;
+        private System.Windows.Forms.ComboBox comboBoxClient;
     }
 }

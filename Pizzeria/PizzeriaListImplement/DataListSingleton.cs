@@ -13,11 +13,14 @@ namespace PizzeriaListImplement
 
         public List<Pizza> Pizzas { get; set; }
 
+        public List<Client> Clients { get; set; }
+
         private DataListSingleton()
         {
             Ingredients = new List<Ingredient>();
             Orders = new List<Order>();
             Pizzas = new List<Pizza>();
+            Clients = new List<Client>();
         }
 
         public static DataListSingleton GetInstance()
