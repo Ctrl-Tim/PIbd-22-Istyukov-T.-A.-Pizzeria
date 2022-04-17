@@ -117,26 +117,33 @@ namespace PizzeriaClientApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Products = APIClient.GetRequest<List<PizzaViewModel>>("api/main/getproductlist");
+            ViewBag.Pizzas = APIClient.GetRequest<List<PizzaViewModel>>("api/main/getpizzalist");
             return View();
         }
 
         [HttpPost]
-        public void Create(int product, int count, decimal sum)
+        public void Create(int pizza, int count, decimal sum)
         {
             if (count == 0 || sum == 0)
             {
-                return;
+                throw new Exception("лох");
+                //return;
             }
-            //прописать запрос
+            APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
+            {
+                ClientId = Program.Client.Id,
+                PizzaId = pizza,
+                Count = count,
+                Sum = sum
+            });
             Response.Redirect("Index");
         } 
 
-            [HttpPost]
-        public decimal Calc(decimal count, int product)
+        [HttpPost]
+        public decimal Calc(decimal count, int pizza)
         {
-            PizzaViewModel prod = APIClient.GetRequest<PizzaViewModel>($"api/main/getproduct?productId={product}");
-            return count * prod.Price;
+            PizzaViewModel pizz = APIClient.GetRequest<PizzaViewModel>($"api/main/getpizza?pizzaId={pizza}");
+            return count * pizz.Price;
         }
     }
 }

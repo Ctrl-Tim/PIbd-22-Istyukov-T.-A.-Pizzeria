@@ -9,7 +9,7 @@ namespace PizzeriaDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=Istyuk-PC\SQLEXPRESS;Initial Catalog=PizzeriaDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=Istyuk-PC\SQLEXPRESS;Initial Catalog=DatabasePizzeria;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
