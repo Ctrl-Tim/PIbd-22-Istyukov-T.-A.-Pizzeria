@@ -36,13 +36,11 @@ namespace PizzeriaBusinessLogic.BusinessLogics
             _orderStorage.Insert(new OrderBindingModel
             {
                 PizzaId = model.PizzaId,
-                PizzaName = model.PizzaName,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
-                Status = OrderStatus.Принят,
-                ClientId = model.ClientId,
-                ClientFIO = model.ClientFIO
+                Status = OrderStatus.Принят
             });
         }
 
@@ -64,14 +62,13 @@ namespace PizzeriaBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 PizzaId = order.PizzaId,
-                PizzaName = order.PizzaName,
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется,
-                ClientId = order.ClientId,
-                ClientFIO = order.ClientFIO
+                Status = OrderStatus.Выполняется
             });
         }
         public void FinishOrder(ChangeStatusBindingModel model)
@@ -92,14 +89,13 @@ namespace PizzeriaBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 PizzaId = order.PizzaId,
-                PizzaName = order.PizzaName,
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Готов,
-                ClientId = order.ClientId,
-                ClientFIO = order.ClientFIO
+                Status = OrderStatus.Готов
             });
         }
         public void DeliveryOrder(ChangeStatusBindingModel model)
@@ -117,14 +113,13 @@ namespace PizzeriaBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 PizzaId = order.PizzaId,
-                PizzaName = order.PizzaName,
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Выдан,
-                ClientId = order.ClientId,
-                ClientFIO = order.ClientFIO
+                Status = OrderStatus.Выдан
             });
         }
     }

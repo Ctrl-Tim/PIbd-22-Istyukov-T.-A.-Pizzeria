@@ -13,10 +13,15 @@ namespace PizzeriaContracts.ViewModels
 
         public int ClientId { get; set; }
 
+        public int? ImplementerId { get; set; }
+
         public int PizzaId { get; set; }
 
         [DisplayName("ФИО клиента")]
         public string ClientFIO { get; set; }
+
+        [DisplayName("Исполнитель")]
+        public string ImplementerFIO { get; set; }
 
         [DisplayName("Пицца")]
         public string PizzaName { get; set; }

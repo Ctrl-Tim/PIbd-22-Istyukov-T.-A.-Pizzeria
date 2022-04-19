@@ -12,6 +12,9 @@ namespace PizzeriaDatabaseImplement.Models
         public int ClientId { get; set; }
 
         [Required]
+        public int? ImplementerId { get; set; }
+
+        [Required]
         public int PizzaId { get; set; }
 
         [Required]
@@ -30,5 +33,7 @@ namespace PizzeriaDatabaseImplement.Models
         public virtual Pizza Pizza { get; set; }
 
         public virtual Client Client { get; set; }
+
+        public virtual Implementer Implementer { get; set; }
     }
 }
