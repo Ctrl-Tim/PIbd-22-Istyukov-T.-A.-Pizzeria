@@ -10,7 +10,7 @@ using PizzeriaDatabaseImplement;
 namespace PizzeriaDatabaseImplement.Migrations
 {
     [DbContext(typeof(PizzeriaDatabase))]
-    [Migration("20220419224342_InitialCreate")]
+    [Migration("20220420064523_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,7 +103,6 @@ namespace PizzeriaDatabaseImplement.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("ImplementerId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("PizzaId")
@@ -180,9 +179,7 @@ namespace PizzeriaDatabaseImplement.Migrations
 
                     b.HasOne("PizzeriaDatabaseImplement.Models.Implementer", "Implementer")
                         .WithMany("Orders")
-                        .HasForeignKey("ImplementerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImplementerId");
 
                     b.HasOne("PizzeriaDatabaseImplement.Models.Pizza", "Pizza")
                         .WithMany("Orders")

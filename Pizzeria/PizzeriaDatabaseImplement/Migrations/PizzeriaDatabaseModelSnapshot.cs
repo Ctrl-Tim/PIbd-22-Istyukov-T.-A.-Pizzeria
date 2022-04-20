@@ -101,7 +101,6 @@ namespace PizzeriaDatabaseImplement.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("ImplementerId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("PizzaId")
@@ -178,9 +177,7 @@ namespace PizzeriaDatabaseImplement.Migrations
 
                     b.HasOne("PizzeriaDatabaseImplement.Models.Implementer", "Implementer")
                         .WithMany("Orders")
-                        .HasForeignKey("ImplementerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImplementerId");
 
                     b.HasOne("PizzeriaDatabaseImplement.Models.Pizza", "Pizza")
                         .WithMany("Orders")

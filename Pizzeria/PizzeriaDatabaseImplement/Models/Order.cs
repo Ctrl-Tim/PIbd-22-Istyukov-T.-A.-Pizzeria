@@ -8,10 +8,8 @@ namespace PizzeriaDatabaseImplement.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public int ClientId { get; set; }
 
-        [Required]
         public int? ImplementerId { get; set; }
 
         [Required]
