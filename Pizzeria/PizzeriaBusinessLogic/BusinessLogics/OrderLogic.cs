@@ -71,6 +71,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 Status = OrderStatus.Выполняется
             });
         }
+
         public void FinishOrder(ChangeStatusBindingModel model)
         {
             var order = _orderStorage.GetElement(new OrderBindingModel{ Id = model.OrderId });
@@ -98,6 +99,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 Status = OrderStatus.Готов
             });
         }
+
         public void DeliveryOrder(ChangeStatusBindingModel model)
         {
             var order = _orderStorage.GetElement(new OrderBindingModel{ Id = model.OrderId });
@@ -114,7 +116,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 Id = order.Id,
                 PizzaId = order.PizzaId,
                 ClientId = order.ClientId,
-                ImplementerId = model.ImplementerId,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,

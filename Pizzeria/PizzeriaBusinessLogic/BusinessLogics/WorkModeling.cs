@@ -53,7 +53,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
             {
                 // делаем работу заново
                 Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count); 
-                _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id });
+                _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id, ImplementerId = order.ImplementerId });
 
                 // отдыхаем
                 Thread.Sleep(implementer.PauseTime);
@@ -70,8 +70,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
 
                         // делаем работу
                         Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count); 
-
-                        _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id });
+                        _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id, ImplementerId = implementer.Id });
 
                         // отдыхаем
                         Thread.Sleep(implementer.PauseTime);
