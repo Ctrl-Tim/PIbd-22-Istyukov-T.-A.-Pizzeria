@@ -10,9 +10,6 @@ namespace PizzeriaView
 {
     public partial class FormStorage : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-
         public int Id { set { id = value; } }
 
         private readonly IStorageLogic logic;
@@ -35,13 +32,13 @@ namespace PizzeriaView
                 {
                     dataGridView.Rows.Clear();
 
-                    foreach (var storageMaterial in storageIngredients)
+                    foreach (var storageIngredient in storageIngredients)
                     {
                         dataGridView.Rows.Add(new object[]
                         {
-                            storageMaterial.Key,
-                            storageMaterial.Value.Item1,
-                            storageMaterial.Value.Item2
+                            storageIngredient.Key,
+                            storageIngredient.Value.Item1,
+                            storageIngredient.Value.Item2
                         });
                     }
                 }
@@ -58,16 +55,14 @@ namespace PizzeriaView
             {
                 try
                 {
-                    StorageViewModel view = logic.Read(new StorageBindingModel
-                    {
-                        Id = id.Value
-                    })?[0];
+                    StorageViewModel view = logic.Read(new StorageBindingModel{ Id = id.Value })?[0];
 
                     if (view != null)
                     {
                         textBoxName.Text = view.StorageName;
                         textBoxManager.Text = view.StorageManager;
                         storageIngredients = view.StorageIngredients;
+
                         LoadData();
                     }
                 }
@@ -103,6 +98,7 @@ namespace PizzeriaView
                     Id = id,
                     StorageName = textBoxName.Text,
                     StorageManager = textBoxManager.Text,
+                    DateCreate = DateTime.Now,
                     StorageIngredients = storageIngredients
                 });
 

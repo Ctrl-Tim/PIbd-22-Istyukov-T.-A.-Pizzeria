@@ -18,5 +18,7 @@ namespace PizzeriaContracts.StoragesContracts
         void Update(StorageBindingModel model);
 
         void Delete(StorageBindingModel model);
+
+        bool CheckIngredientsCount(int count, Dictionary<int, (string, int)> ingredients);
     }
 }

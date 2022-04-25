@@ -180,5 +180,10 @@ namespace PizzeriaListImplement.Implements
                 StorageIngredients = storageMaterials
             };
         }
+
+        public bool CheckIngredientsCount(int count, Dictionary<int, (string, int)> ingredients)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

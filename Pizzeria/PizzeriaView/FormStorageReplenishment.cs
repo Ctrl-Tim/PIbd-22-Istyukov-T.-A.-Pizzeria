@@ -10,10 +10,7 @@ namespace PizzeriaView
 {
     public partial class FormStorageReplenishment : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-
-        public int MaterialId
+        public int IngredientId
         {
             get
             {
@@ -25,7 +22,7 @@ namespace PizzeriaView
             }
         }
 
-        public int Storage
+        public int StorageId
         {
             get
             {
@@ -98,12 +95,11 @@ namespace PizzeriaView
                 return;
             }
 
-            _storageLogic.Replenishment(new ReplenishStorageBindingModel
-            {
+            _storageLogic.Replenishment(new ReplenishStorageBindingModel {
                 StorageId = Convert.ToInt32(comboBoxName.SelectedValue),
                 IngredientId = Convert.ToInt32(comboBoxIngredient.SelectedValue),
                 Count = Convert.ToInt32(textBoxCount.Text)
-            });
+            }, IngredientId, Count);
 
             DialogResult = DialogResult.OK;
 

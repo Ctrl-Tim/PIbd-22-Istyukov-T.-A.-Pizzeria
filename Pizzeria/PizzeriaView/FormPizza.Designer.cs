@@ -34,13 +34,14 @@ namespace PizzeriaView
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.groupBoxIngredient = new System.Windows.Forms.GroupBox();
+            this.ButtonRef = new System.Windows.Forms.Button();
+            this.ButtonDel = new System.Windows.Forms.Button();
+            this.ButtonUpd = new System.Windows.Forms.Button();
+            this.ButtonAdd = new System.Windows.Forms.Button();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.ButtonAdd = new System.Windows.Forms.Button();
-            this.ButtonUpd = new System.Windows.Forms.Button();
-            this.ButtonDel = new System.Windows.Forms.Button();
-            this.ButtonRef = new System.Windows.Forms.Button();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ingredient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxIngredient.SuspendLayout();
@@ -95,6 +96,64 @@ namespace PizzeriaView
             this.groupBoxIngredient.TabStop = false;
             this.groupBoxIngredient.Text = "Ингредиенты";
             // 
+            // ButtonRef
+            // 
+            this.ButtonRef.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ButtonRef.Location = new System.Drawing.Point(459, 182);
+            this.ButtonRef.Name = "ButtonRef";
+            this.ButtonRef.Size = new System.Drawing.Size(97, 30);
+            this.ButtonRef.TabIndex = 4;
+            this.ButtonRef.Text = "Обновить";
+            this.ButtonRef.UseVisualStyleBackColor = true;
+            this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
+            // 
+            // ButtonDel
+            // 
+            this.ButtonDel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ButtonDel.Location = new System.Drawing.Point(459, 134);
+            this.ButtonDel.Name = "ButtonDel";
+            this.ButtonDel.Size = new System.Drawing.Size(97, 30);
+            this.ButtonDel.TabIndex = 3;
+            this.ButtonDel.Text = "Удалить";
+            this.ButtonDel.UseVisualStyleBackColor = true;
+            this.ButtonDel.Click += new System.EventHandler(this.ButtonDel_Click);
+            // 
+            // ButtonUpd
+            // 
+            this.ButtonUpd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ButtonUpd.Location = new System.Drawing.Point(459, 84);
+            this.ButtonUpd.Name = "ButtonUpd";
+            this.ButtonUpd.Size = new System.Drawing.Size(97, 30);
+            this.ButtonUpd.TabIndex = 2;
+            this.ButtonUpd.Text = "Изменить";
+            this.ButtonUpd.UseVisualStyleBackColor = true;
+            this.ButtonUpd.Click += new System.EventHandler(this.ButtonUpd_Click);
+            // 
+            // ButtonAdd
+            // 
+            this.ButtonAdd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ButtonAdd.Location = new System.Drawing.Point(459, 35);
+            this.ButtonAdd.Name = "ButtonAdd";
+            this.ButtonAdd.Size = new System.Drawing.Size(97, 30);
+            this.ButtonAdd.TabIndex = 1;
+            this.ButtonAdd.Text = "Добавить";
+            this.ButtonAdd.UseVisualStyleBackColor = true;
+            this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.Ingredient,
+            this.Count});
+            this.dataGridView.Location = new System.Drawing.Point(6, 22);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RowTemplate.Height = 25;
+            this.dataGridView.Size = new System.Drawing.Size(427, 267);
+            this.dataGridView.TabIndex = 0;
+            // 
             // ButtonCancel
             // 
             this.ButtonCancel.Location = new System.Drawing.Point(500, 381);
@@ -115,74 +174,21 @@ namespace PizzeriaView
             this.ButtonSave.UseVisualStyleBackColor = true;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
-            // dataGridView
+            // ID
             // 
-            this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Ingredient,
-            this.Count});
-            this.dataGridView.Location = new System.Drawing.Point(6, 22);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.RowTemplate.Height = 25;
-            this.dataGridView.Size = new System.Drawing.Size(427, 267);
-            this.dataGridView.TabIndex = 0;
-            // 
-            // ButtonAdd
-            // 
-            this.ButtonAdd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonAdd.Location = new System.Drawing.Point(459, 35);
-            this.ButtonAdd.Name = "ButtonAdd";
-            this.ButtonAdd.Size = new System.Drawing.Size(97, 30);
-            this.ButtonAdd.TabIndex = 1;
-            this.ButtonAdd.Text = "Добавить";
-            this.ButtonAdd.UseVisualStyleBackColor = true;
-            this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
-            // 
-            // ButtonUpd
-            // 
-            this.ButtonUpd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonUpd.Location = new System.Drawing.Point(459, 84);
-            this.ButtonUpd.Name = "ButtonUpd";
-            this.ButtonUpd.Size = new System.Drawing.Size(97, 30);
-            this.ButtonUpd.TabIndex = 2;
-            this.ButtonUpd.Text = "Изменить";
-            this.ButtonUpd.UseVisualStyleBackColor = true;
-            this.ButtonUpd.Click += new System.EventHandler(this.ButtonUpd_Click);
-            // 
-            // ButtonDel
-            // 
-            this.ButtonDel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonDel.Location = new System.Drawing.Point(459, 134);
-            this.ButtonDel.Name = "ButtonDel";
-            this.ButtonDel.Size = new System.Drawing.Size(97, 30);
-            this.ButtonDel.TabIndex = 3;
-            this.ButtonDel.Text = "Удалить";
-            this.ButtonDel.UseVisualStyleBackColor = true;
-            this.ButtonDel.Click += new System.EventHandler(this.ButtonDel_Click);
-            // 
-            // ButtonRef
-            // 
-            this.ButtonRef.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonRef.Location = new System.Drawing.Point(459, 182);
-            this.ButtonRef.Name = "ButtonRef";
-            this.ButtonRef.Size = new System.Drawing.Size(97, 30);
-            this.ButtonRef.TabIndex = 4;
-            this.ButtonRef.Text = "Обновить";
-            this.ButtonRef.UseVisualStyleBackColor = true;
-            this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
             // 
             // Ingredient
             // 
             this.Ingredient.HeaderText = "Ингредиент";
             this.Ingredient.Name = "Ingredient";
-            this.Ingredient.Width = 280;
             // 
             // Count
             // 
             this.Count.HeaderText = "Количество";
             this.Count.Name = "Count";
-            this.Count.Width = 140;
             // 
             // FormPizza
             // 
@@ -220,6 +226,7 @@ namespace PizzeriaView
         private System.Windows.Forms.Button ButtonDel;
         private System.Windows.Forms.Button ButtonUpd;
         private System.Windows.Forms.Button ButtonAdd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ingredient;
         private System.Windows.Forms.DataGridViewTextBoxColumn Count;
     }
