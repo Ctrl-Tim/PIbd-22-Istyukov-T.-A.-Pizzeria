@@ -6,6 +6,8 @@ using System;
 using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
+using PizzeriaBusinessLogic.OfficePackage;
+using PizzeriaBusinessLogic.OfficePackage.Implements;
 
 namespace PizzeriaView
 {
@@ -37,6 +39,11 @@ namespace PizzeriaView
             currentContainer.RegisterType<IIngredientLogic, IngredientLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IPizzaLogic, PizzaLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

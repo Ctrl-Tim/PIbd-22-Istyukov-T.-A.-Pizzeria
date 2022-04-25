@@ -3,22 +3,21 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.15">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Unity" Version="5.11.10" />
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.16" />
+    <PackageReference Include="Unity" Version="5.11.9" />
+    <PackageReference Include="Unity.Abstractions" Version="5.11.6" />
+    <PackageReference Include="Unity.Container" Version="5.11.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PizzeriaBusinessLogic\PizzeriaBusinessLogic.csproj" />
+    <ProjectReference Include="..\PizzeriaContracts\PizzeriaContracts.csproj" />
     <ProjectReference Include="..\PizzeriaDatabaseImplement\PizzeriaDatabaseImplement.csproj" />
-    <ProjectReference Include="..\PizzeriaFileImplement\PizzeriaFileImplement.csproj" />
-    <ProjectReference Include="..\PizzeriaListImplement\PizzeriaListImplement.csproj" />
   </ItemGroup>
 
 </Project>
