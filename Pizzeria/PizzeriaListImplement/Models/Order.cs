@@ -10,6 +10,8 @@ namespace PizzeriaListImplement.Models
     {
         public int Id { get; set; }
 
+        public int ClientId { get; set; }
+
         public int PizzaId { get; set; }
 
         public int Count { get; set; }

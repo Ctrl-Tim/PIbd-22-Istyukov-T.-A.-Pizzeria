@@ -40,7 +40,9 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 Count = model.Count,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
-                Status = OrderStatus.Принят
+                Status = OrderStatus.Принят,
+                ClientId = model.ClientId,
+                ClientFIO = model.ClientFIO
             });
         }
 
@@ -67,7 +69,9 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
+                Status = OrderStatus.Выполняется,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO
             });
         }
         public void FinishOrder(ChangeStatusBindingModel model)
@@ -93,7 +97,9 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Готов
+                Status = OrderStatus.Готов,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO
             });
         }
         public void DeliveryOrder(ChangeStatusBindingModel model)
@@ -116,7 +122,9 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Выдан
+                Status = OrderStatus.Выдан,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO
             });
         }
     }
