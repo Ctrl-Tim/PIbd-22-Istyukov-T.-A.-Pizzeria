@@ -17,6 +17,8 @@ namespace PizzeriaListImplement
 
         public List<Implementer> Implementers { get; set; }
 
+        public List<MessageInfo> MessagesInfo { get; set; }
+
         private DataListSingleton()
         {
             Ingredients = new List<Ingredient>();
@@ -24,6 +26,7 @@ namespace PizzeriaListImplement
             Pizzas = new List<Pizza>();
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
+            MessagesInfo = new List<MessageInfo>();
         }
 
         public static DataListSingleton GetInstance()

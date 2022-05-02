@@ -145,5 +145,14 @@ namespace PizzeriaClientApp.Controllers
             PizzaViewModel pizz = APIClient.GetRequest<PizzaViewModel>($"api/main/getpizza?pizzaId={pizza}");
             return count * pizz.Price;
         }
+
+        public IActionResult Messages()
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/GetMessages?clientId={Program.Client.Id}"));
+        }
     }
 }

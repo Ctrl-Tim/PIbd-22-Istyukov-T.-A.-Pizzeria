@@ -1,4 +1,6 @@
 using PizzeriaBusinessLogic.BusinessLogics;
+using PizzeriaBusinessLogic.MailWorker;
+using PizzeriaContracts.BindingModels;
 using PizzeriaContracts.BusinessLogicsContracts;
 using PizzeriaContracts.StoragesContracts;
 using PizzeriaDatabaseImplement.Implements;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace PizzeriaRestApi
 {
@@ -26,10 +29,14 @@ namespace PizzeriaRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<IPizzaStorage, PizzaStorage>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
 
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IPizzaLogic, PizzaLogic>();
+            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
+
+            services.AddSingleton<AbstractMailWorker, MailKitWorker>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -57,6 +64,17 @@ namespace PizzeriaRestApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            var mailSender = app.ApplicationServices.GetService<AbstractMailWorker>();
+            mailSender.MailConfig(new MailConfigBindingModel
+            {
+                MailLogin = Configuration?.GetSection("MailLogin")?.Value.ToString(),
+                MailPassword = Configuration?.GetSection("MailPassword")?.Value.ToString(),
+                SmtpClientHost = Configuration?.GetSection("SmtpClientHost")?.Value.ToString(),
+                SmtpClientPort = Convert.ToInt32(Configuration?.GetSection("SmtpClientPort")?.Value.ToString()),
+                PopHost = Configuration?.GetSection("PopHost")?.Value.ToString(),
+                PopPort = Convert.ToInt32(Configuration?.GetSection("PopPort")?.Value.ToString())
             });
         }
     }
