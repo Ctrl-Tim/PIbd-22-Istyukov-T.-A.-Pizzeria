@@ -34,18 +34,18 @@ namespace PizzeriaBusinessLogic.BusinessLogics
         }
         public void CreateOrUpdate(ClientBindingModel model)
         {
-            var element = _clientStorage.GetElement(new ClientBindingModel { Email = model.Email });
+            var element = _clientStorage.GetElement( new ClientBindingModel {ClientFIO =model.ClientFIO });
             if (element != null && element.Id != model.Id)
             {
                 throw new Exception("Уже есть клиент с таким ФИО");
             }
-            if (!Regex.IsMatch(model.Email, @"регулярное выражение"))
+            if (!Regex.IsMatch(model.Email, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.\s]\w+)*$"))
             {
-                throw new Exception("В качестве логина почта указана должна быть");
+                throw new Exception("В качестве логина должна быть указана почта");
             }
             if (model.Password.Length > _passwordMaxLength ||
                     model.Password.Length < _passwordMinLength ||
-                    !Regex.IsMatch(model.Password, @"^((\w+\d+\W+)|(\w+\W+\d+)|(\d+\w+\W+)|(\d+\W+\w+)|(\W+\w+\d+)|(\W+\d+\w+))[\w\d\W]*$"))
+                    !Regex.IsMatch(model.Password, @"^((\w+\d+\W+)|(\w+\W+\d+)|(\d+\w+\W+)|(\d+S\W+\w+)|(\W+\w+\d+)|(\W+\d+\w+))[\w\d\W]*$"))
             {
                 throw new Exception($"Пароль длиной от {_passwordMinLength} до {_passwordMaxLength} должен быть и из цифр, букв и небуквенных символов должен состоять");
             }

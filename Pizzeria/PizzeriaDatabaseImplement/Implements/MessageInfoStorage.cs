@@ -13,7 +13,7 @@ namespace PizzeriaDatabaseImplement.Implements
         public List<MessageInfoViewModel> GetFullList()
         {
             using var context = new PizzeriaDatabase();
-            return context.MessageInfoes
+            return context.MessagesInfo
                 .Select(rec => new MessageInfoViewModel
                 {
                     MessageId = rec.MessageId,
@@ -33,7 +33,7 @@ namespace PizzeriaDatabaseImplement.Implements
             }
 
             using var context = new PizzeriaDatabase();
-            return context.MessageInfoes
+            return context.MessagesInfo
                 .Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
                     (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
                 .Select(rec => new MessageInfoViewModel
@@ -50,7 +50,7 @@ namespace PizzeriaDatabaseImplement.Implements
         public void Insert(MessageInfoBindingModel model)
         {
             using var context = new PizzeriaDatabase();
-            MessageInfo element = context.MessageInfoes
+            MessageInfo element = context.MessagesInfo
                 .FirstOrDefault(rec => rec.MessageId == model.MessageId);
 
             if (element != null)
@@ -58,7 +58,7 @@ namespace PizzeriaDatabaseImplement.Implements
                 throw new Exception("Уже есть письмо с таким идентификатором");
             }
 
-            context.MessageInfoes.Add(new MessageInfo
+            context.MessagesInfo.Add(new MessageInfo
             {
                 MessageId = model.MessageId,
                 ClientId = model.ClientId,
