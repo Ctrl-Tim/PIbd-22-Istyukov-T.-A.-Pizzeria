@@ -94,7 +94,6 @@ namespace PizzeriaDatabaseImplement.Implements
                 }
                 CreateModel(model, element, context);
                 context.SaveChanges();
-
                 transaction.Commit();
             }
             catch

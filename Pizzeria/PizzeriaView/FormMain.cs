@@ -9,11 +9,13 @@ namespace PizzeriaView
     public partial class FormMain : Form
     {
         private readonly IOrderLogic _orderLogic;
+        private readonly IReportLogic _reportLogic;
 
-        public FormMain(IOrderLogic orderLogic)
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic)
         {
             InitializeComponent();
             _orderLogic = orderLogic;
+            _reportLogic = reportLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -124,6 +126,28 @@ namespace PizzeriaView
         private void ButtonRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void IngredientsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _reportLogic.SaveIngredientsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void IngredientPizzasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportPizzaIngredients>();
+            form.ShowDialog();
+        }
+
+        private void OrdersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
         }
     }
 }

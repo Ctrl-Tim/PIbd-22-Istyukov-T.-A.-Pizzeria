@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31410.357
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaView", "PizzeriaView\PizzeriaView.csproj", "{F83B4AD0-B7EA-4F3A-9862-2A9009EC7C0C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaContracts", "PizzeriaContracts\PizzeriaContracts.csproj", "{2DB22764-ED2E-468F-9185-FD3A7B601FAC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaBusinessLogic", "PizzeriaBusinessLogic\PizzeriaBusinessLogic.csproj", "{42C25CCB-B506-4F47-9D94-1970C30412D8}"
@@ -13,7 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaListImplement", "Pi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaFileImplement", "PizzeriaFileImplement\PizzeriaFileImplement.csproj", "{AE691FB7-B864-42C0-BF84-C5F29B4505B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzeriaDatabaseImplement", "PizzeriaDatabaseImplement\PizzeriaDatabaseImplement.csproj", "{983C3DCC-9801-4585-BE1F-89652948FEE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaDatabaseImplement", "PizzeriaDatabaseImplement\PizzeriaDatabaseImplement.csproj", "{983C3DCC-9801-4585-BE1F-89652948FEE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzeriaView", "PizzeriaView\PizzeriaView.csproj", "{70FFDEDF-551B-4161-83D6-3A73990D1005}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2DB22764-ED2E-468F-9185-FD3A7B601FAC} = {2DB22764-ED2E-468F-9185-FD3A7B601FAC}
+		{42C25CCB-B506-4F47-9D94-1970C30412D8} = {42C25CCB-B506-4F47-9D94-1970C30412D8}
+		{983C3DCC-9801-4585-BE1F-89652948FEE7} = {983C3DCC-9801-4585-BE1F-89652948FEE7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +26,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F83B4AD0-B7EA-4F3A-9862-2A9009EC7C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F83B4AD0-B7EA-4F3A-9862-2A9009EC7C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F83B4AD0-B7EA-4F3A-9862-2A9009EC7C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F83B4AD0-B7EA-4F3A-9862-2A9009EC7C0C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2DB22764-ED2E-468F-9185-FD3A7B601FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2DB22764-ED2E-468F-9185-FD3A7B601FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DB22764-ED2E-468F-9185-FD3A7B601FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +46,10 @@ Global
 		{983C3DCC-9801-4585-BE1F-89652948FEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{983C3DCC-9801-4585-BE1F-89652948FEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{983C3DCC-9801-4585-BE1F-89652948FEE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70FFDEDF-551B-4161-83D6-3A73990D1005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70FFDEDF-551B-4161-83D6-3A73990D1005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70FFDEDF-551B-4161-83D6-3A73990D1005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70FFDEDF-551B-4161-83D6-3A73990D1005}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
