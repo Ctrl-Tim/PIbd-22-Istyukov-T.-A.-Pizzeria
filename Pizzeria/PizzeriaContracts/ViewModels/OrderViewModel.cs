@@ -23,7 +23,7 @@ namespace PizzeriaContracts.ViewModels
         public decimal Sum { get; set; }
 
         [DisplayName("Статус")]
-        public OrderStatus Status { get; set; }
+        public string Status { get; set; }
 
         [DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }

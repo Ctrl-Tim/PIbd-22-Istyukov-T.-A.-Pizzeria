@@ -111,6 +111,54 @@ namespace PizzeriaDatabaseImplement.Migrations
                     b.ToTable("PizzaIngredients");
                 });
 
+            modelBuilder.Entity("PizzeriaDatabaseImplement.Models.Storage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("StorageManager")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StorageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Storages");
+                });
+
+            modelBuilder.Entity("PizzeriaDatabaseImplement.Models.StorageIngredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IngredientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StorageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IngredientId");
+
+                    b.HasIndex("StorageId");
+
+                    b.ToTable("StorageIngredients");
+                });
+
             modelBuilder.Entity("PizzeriaDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("PizzeriaDatabaseImplement.Models.Pizza", "Pizza")
@@ -141,9 +189,30 @@ namespace PizzeriaDatabaseImplement.Migrations
                     b.Navigation("Pizza");
                 });
 
+            modelBuilder.Entity("PizzeriaDatabaseImplement.Models.StorageIngredient", b =>
+                {
+                    b.HasOne("PizzeriaDatabaseImplement.Models.Ingredient", "Ingredient")
+                        .WithMany("StorageIngredients")
+                        .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PizzeriaDatabaseImplement.Models.Storage", "Storage")
+                        .WithMany("StorageIngredients")
+                        .HasForeignKey("StorageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ingredient");
+
+                    b.Navigation("Storage");
+                });
+
             modelBuilder.Entity("PizzeriaDatabaseImplement.Models.Ingredient", b =>
                 {
                     b.Navigation("PizzaIngredients");
+
+                    b.Navigation("StorageIngredients");
                 });
 
             modelBuilder.Entity("PizzeriaDatabaseImplement.Models.Pizza", b =>
@@ -151,6 +220,11 @@ namespace PizzeriaDatabaseImplement.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("PizzaIngredients");
+                });
+
+            modelBuilder.Entity("PizzeriaDatabaseImplement.Models.Storage", b =>
+                {
+                    b.Navigation("StorageIngredients");
                 });
 #pragma warning restore 612, 618
         }

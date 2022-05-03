@@ -2,6 +2,7 @@
 using PizzeriaContracts.StoragesContracts;
 using PizzeriaContracts.ViewModels;
 using PizzeriaDatabaseImplement.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace PizzeriaDatabaseImplement.Implements
                         PizzaId = rec.PizzaId,
                         Count = rec.Count,
                         Sum = rec.Sum,
-                        Status = rec.Status,
+                        Status = rec.Status.ToString(),
                         DateCreate = rec.DateCreate,
                         DateImplement = rec.DateImplement
                     })
@@ -48,7 +49,7 @@ namespace PizzeriaDatabaseImplement.Implements
                         PizzaId = rec.PizzaId,
                         Count = rec.Count,
                         Sum = rec.Sum,
-                        Status = rec.Status,
+                        Status = rec.Status.ToString(),
                         DateCreate = rec.DateCreate,
                         DateImplement = rec.DateImplement
                     })
@@ -75,7 +76,7 @@ namespace PizzeriaDatabaseImplement.Implements
                         PizzaId = order.PizzaId,
                         Count = order.Count,
                         Sum = order.Sum,
-                        Status = order.Status,
+                        Status = order.Status.ToString(),
                         DateCreate = order.DateCreate,
                         DateImplement = order.DateImplement
                     } :

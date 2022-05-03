@@ -9,7 +9,7 @@ namespace PizzeriaDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=Istyuk-PC\SQLEXPRESS;Initial Catalog=PizzeriaDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=Istyuk-PC\SQLEXPRESS;Initial Catalog=PizzeriaDatabase2;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -21,5 +21,9 @@ namespace PizzeriaDatabaseImplement
         public virtual DbSet<PizzaIngredient> PizzaIngredients { set; get; }
 
         public virtual DbSet<Order> Orders { set; get; }
+
+        public virtual DbSet<Storage> Storages { set; get; }
+        
+        public virtual DbSet<StorageIngredient> StorageIngredients { set; get; }
     }
 }
