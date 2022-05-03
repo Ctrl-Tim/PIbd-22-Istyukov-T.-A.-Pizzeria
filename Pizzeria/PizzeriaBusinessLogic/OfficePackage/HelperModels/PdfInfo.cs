@@ -15,5 +15,7 @@ namespace PizzeriaBusinessLogic.OfficePackage.HelperModels
         public DateTime DateTo { get; set; }
 
         public List<ReportOrdersViewModel> Orders { get; set; }
+
+        public List<ReportOrdersByDateViewModel> OrdersByDate { get; set; }
     }
 }

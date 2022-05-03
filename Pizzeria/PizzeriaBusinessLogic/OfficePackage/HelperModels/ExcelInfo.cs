@@ -10,5 +10,7 @@ namespace PizzeriaBusinessLogic.OfficePackage.HelperModels
         public string Title { get; set; }
 
         public List<ReportPizzaIngredientViewModel> PizzaIngredients { get; set; }
+
+        public List<ReportStorageIngredientViewModel> StorageIngredients { get; set; }
     }
 }

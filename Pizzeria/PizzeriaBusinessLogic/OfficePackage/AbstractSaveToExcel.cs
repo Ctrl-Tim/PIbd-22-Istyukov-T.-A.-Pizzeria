@@ -71,8 +71,71 @@ namespace PizzeriaBusinessLogic.OfficePackage
                 }
 
                 SaveExcel(info);
-        } 
- 
+        }
+
+        public void CreateReportStorage(ExcelInfo info)
+        {
+            CreateExcel(info);
+            InsertCellInWorksheet(new ExcelCellParameters
+            {
+                ColumnName = "A",
+                RowIndex = 1,
+                Text = info.Title,
+                StyleInfo = ExcelStyleInfoType.Title
+            });
+            MergeCells(new ExcelMergeParameters
+            {
+                CellFromName = "A1",
+                CellToName = "C1"
+            });
+            uint rowIndex = 2;
+            foreach (var comp in info.StorageIngredients)
+            {
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    ColumnName = "A",
+                    RowIndex = rowIndex,
+                    Text = comp.StorageName,
+                    StyleInfo = ExcelStyleInfoType.Text
+                });
+                rowIndex++;
+                foreach (var product in comp.Ingredients)
+                {
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        ColumnName = "B",
+                        RowIndex = rowIndex,
+                        Text = product.Item1,
+                        StyleInfo = ExcelStyleInfoType.TextWithBroder
+                    });
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        ColumnName = "C",
+                        RowIndex = rowIndex,
+                        Text = product.Item2.ToString(),
+                        StyleInfo = ExcelStyleInfoType.TextWithBroder
+                    });
+                    rowIndex++;
+                }
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    ColumnName = "A",
+                    RowIndex = rowIndex,
+                    Text = "Итого",
+                    StyleInfo = ExcelStyleInfoType.Text
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    ColumnName = "C",
+                    RowIndex = rowIndex,
+                    Text = comp.TotalCount.ToString(),
+                    StyleInfo = ExcelStyleInfoType.Text
+                });
+                rowIndex++;
+            }
+            SaveExcel(info);
+        }
+
         /// <summary>
         /// Создание excel-файла
         /// </summary>

@@ -18,18 +18,21 @@ namespace PizzeriaBusinessLogic.BusinessLogics
 
         private readonly IOrderStorage _orderStorage;
 
+        private readonly IStorageStorage _storageStorage;
+
         private readonly AbstractSaveToExcel _saveToExcel;
 
         private readonly AbstractSaveToWord _saveToWord;
 
         private readonly AbstractSaveToPdf _saveToPdf;
 
-        public ReportLogic(IPizzaStorage pizzaStorage, IIngredientStorage ingredientStorage, IOrderStorage orderStorage,
+        public ReportLogic(IPizzaStorage pizzaStorage, IIngredientStorage ingredientStorage, IOrderStorage orderStorage, IStorageStorage storageStorage,
                             AbstractSaveToExcel saveToExcel, AbstractSaveToWord saveToWord, AbstractSaveToPdf saveToPdf)
         {
             _pizzaStorage = pizzaStorage;
             _ingredientStorage = ingredientStorage;
             _orderStorage = orderStorage;
+            _storageStorage = storageStorage;
 
             _saveToExcel = saveToExcel;
             _saveToWord = saveToWord;
@@ -37,7 +40,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
         } 
  
         /// <summary>
-        /// Получение списка компонент с указанием цены
+        /// Получение списка ингредиентов с указанием цены
         /// </summary> 
         /// <returns></returns>
         public List<ReportPizzaIngredientViewModel> GetPizzaIngredient()
@@ -69,8 +72,34 @@ namespace PizzeriaBusinessLogic.BusinessLogics
             } 
  
             return list;
-        } 
- 
+        }
+
+        /// <summary>
+        /// Получение списка складов с указанием названия, ФИО ответственного и даты создания
+        /// </summary> 
+        /// <returns></returns>
+        public List<ReportStorageIngredientViewModel> GetStorageIngredient()
+        {
+            var storages = _storageStorage.GetFullList();
+            var list = new List<ReportStorageIngredientViewModel>();
+            foreach (var storage in storages)
+            {
+                var record = new ReportStorageIngredientViewModel
+                {
+                    StorageName = storage.StorageName,
+                    Ingredients = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+                foreach (var ingredient in storage.StorageIngredients)
+                {
+                    record.Ingredients.Add(new Tuple<string, int>(ingredient.Value.Item1, ingredient.Value.Item2));
+                    record.TotalCount += ingredient.Value.Item2;
+                }
+                list.Add(record);
+            }
+            return list;
+        }
+
         /// <summary>
         /// Получение списка заказов за определенный период
         /// </summary>
@@ -88,8 +117,26 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                     Status = x.Status.ToString()
                 })
                 .ToList();
-        } 
- 
+        }
+
+        /// <summary>
+        /// Получение списка заказов за весь период
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<ReportOrdersByDateViewModel> GetOrdersByDate()
+        {
+            return _orderStorage.GetFullList()
+            .GroupBy(rec => rec.DateCreate.ToShortDateString())
+            .Select(x => new ReportOrdersByDateViewModel
+            {
+                DateCreate = Convert.ToDateTime(x.Key),
+                Count = x.Count(),
+                Sum = x.Sum(rec => rec.Sum)
+            })
+           .ToList();
+        }
+
         /// <summary>
         /// Сохранение компонент в файл-Word
         /// </summary>
@@ -102,10 +149,24 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 Title = "Список пицц",
                 Pizzas = _pizzaStorage.GetFullList()
             });
-        } 
- 
+        }
+
         /// <summary>
-        /// Сохранение компонент с указаеним продуктов в файл-Excel
+        /// Сохранение складов в файл-Word
+        /// </summary>
+        /// <param name="model"></param>
+        public void SaveStoragesToWordFile(ReportBindingModel model)
+        {
+            _saveToWord.CreateDocStorage(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                Storages = _storageStorage.GetFullList()
+            });
+        }
+
+        /// <summary>
+        /// Сохранение ингредиентов с указаеним продуктов в файл-Excel
         /// </summary>
         /// <param name="model"></param>
         public void SavePizzaIngredientToExcelFile(ReportBindingModel model)
@@ -116,8 +177,23 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 Title = "Список ингредиентов",
                 PizzaIngredients = GetPizzaIngredient()
             });
-        } 
- 
+        }
+
+        /// <summary>
+        /// Сохранение ингредиентов с указаеним продуктов в файл-Excel
+        /// </summary>
+        /// <param name="model"></param>
+        public void SaveStorageIngredientToExcelFile(ReportBindingModel model)
+        {
+            _saveToExcel.CreateReportStorage(new ExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Список ингредиентов",
+                StorageIngredients = GetStorageIngredient()
+            });
+        }
+
+
         /// <summary>
         /// Сохранение заказов в файл-Pdf
         /// </summary>
@@ -132,6 +208,20 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                 DateTo = model.DateTo.Value,
                 Orders = GetOrders(model)
             });
-        }   
+        }
+
+        /// <summary>
+        /// Сохранение заказов в файл-Pdf
+        /// </summary>
+        /// <param name="model"></param>
+        public void SaveOrdersByDateToPdfFile(ReportBindingModel model)
+        {
+            _saveToPdf.CreateDocOrdersByDate(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Список заказов по датам",
+                OrdersByDate = GetOrdersByDate()
+            });
+        }
     }
 }

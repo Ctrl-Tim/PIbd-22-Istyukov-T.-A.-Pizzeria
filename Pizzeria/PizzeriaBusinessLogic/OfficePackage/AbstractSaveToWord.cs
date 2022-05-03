@@ -35,8 +35,32 @@ namespace PizzeriaBusinessLogic.OfficePackage
             }
 
             SaveWord(info);
-        } 
- 
+        }
+
+        public void CreateDocStorage(WordInfo info)
+        {
+            CreateWord(info);
+            CreateParagraph(new WordParagraph
+            {
+                Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties { Bold = true, Size = "24" }) },
+                TextProperties = new WordTextProperties
+                {
+                    Size = "24",
+                    JustificationType = WordJustificationType.Center
+                }
+            });
+            CreateTable(new List<string>() { "Название", "ФИО ответственного", "Дата создания" });
+            foreach (var storage in info.Storages)
+            {
+                AddRowTable(new List<string>() {
+                    storage.StorageName,
+                    storage.StorageManager,
+                    storage.DateCreate.ToShortDateString()
+                });
+            }
+            SaveWord(info);
+        }
+
         /// <summary>
         /// Создание doc-файла
         /// </summary>
@@ -49,13 +73,25 @@ namespace PizzeriaBusinessLogic.OfficePackage
         /// <param name="paragraph"></param>
         /// <returns></returns> 
 
- 
         protected abstract void CreateParagraph(WordParagraph paragraph);
 
         /// <summary>
         /// Сохранение файла
         /// </summary>
         /// <param name="info"></param>
-        protected abstract void SaveWord(WordInfo info); 
+        protected abstract void SaveWord(WordInfo info);
+
+        /// <summary>
+        /// Сохранение таблицы
+        /// </summary>
+        /// <param name="info"></param>
+        protected abstract void CreateTable(List<string> tableHeaderInfo);
+
+        /// <summary>
+        /// Создание новой строки в таблице
+        /// </summary>
+        /// <param name="paragraph"></param>
+        /// <returns></returns> 
+        protected abstract void AddRowTable(List<string> tableRowInfo);
     }
 }
