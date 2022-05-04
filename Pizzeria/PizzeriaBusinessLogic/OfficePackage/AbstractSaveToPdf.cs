@@ -70,6 +70,12 @@ namespace PizzeriaBusinessLogic.OfficePackage
                     ParagraphAlignment = PdfParagraphAlignmentType.Left
                 });
             }
+            decimal sum = info.OrdersByDate.Sum(rec => rec.Sum);
+            CreateParagraph(new PdfParagraph
+            {
+                Text = $"Итого: {sum}",
+                Style = "NormalTitle"
+            });
             SavePdf(info);
         }
 
