@@ -161,5 +161,11 @@ namespace PizzeriaView
             _workProcces.DoWork(_implementerLogic, _orderLogic);
             LoadData();
         }
+
+        private void письмаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormMessagesInfo>();
+            form.ShowDialog();
+        }
     }
 }
