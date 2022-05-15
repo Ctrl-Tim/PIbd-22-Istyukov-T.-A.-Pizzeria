@@ -53,8 +53,7 @@ namespace PizzeriaListImplement.Implements
             }
             foreach (var order in source.Orders)
             {
-                if (order.Id == model.Id || order.PizzaId ==
-               model.PizzaId)
+                if (order.Id == model.Id || order.PizzaId == model.PizzaId)
                 {
                     return CreateModel(order);
                 }
@@ -112,6 +111,7 @@ namespace PizzeriaListImplement.Implements
         {
             order.PizzaId = model.PizzaId;
             order.ClientId = (int)model.ClientId;
+            order.ImplementerId = (int)model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -142,11 +142,23 @@ namespace PizzeriaListImplement.Implements
                 }
             }
 
+            string implementerFIO = null;
+            foreach (Implementer implementer in source.Implementers)
+            {
+                if (order.ImplementerId == implementer.Id)
+                {
+                    implementerFIO = implementer.ImplementerFIO;
+                    break;
+                }
+            }
+
             return new OrderViewModel
             {
                 Id = order.Id,
                 ClientId = order.ClientId,
                 ClientFIO = clientFIO,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = implementerFIO,
                 PizzaId = order.PizzaId,
                 PizzaName = PizzaName,
                 Count = order.Count,

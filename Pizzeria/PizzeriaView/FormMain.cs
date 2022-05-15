@@ -10,12 +10,16 @@ namespace PizzeriaView
     {
         private readonly IOrderLogic _orderLogic;
         private readonly IReportLogic _reportLogic;
+        private readonly IImplementerLogic _implementerLogic;
+        private readonly IWorkProcess _workProcces;
 
-        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic)
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, IImplementerLogic implementerLogic, IWorkProcess workProcess)
         {
             InitializeComponent();
             _orderLogic = orderLogic;
             _reportLogic = reportLogic;
+            _implementerLogic = implementerLogic;
+            _workProcces = workProcess;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -144,6 +148,18 @@ namespace PizzeriaView
         {
             var form = Program.Container.Resolve<FormClients>();
             form.ShowDialog();
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormImplementers>();
+            form.ShowDialog();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _workProcces.DoWork(_implementerLogic, _orderLogic);
+            LoadData();
         }
     }
 }
