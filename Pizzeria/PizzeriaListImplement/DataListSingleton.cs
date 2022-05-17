@@ -13,22 +13,16 @@ namespace PizzeriaListImplement
 
         public List<Pizza> Pizzas { get; set; }
 
-<<<<<<< HEAD
         public List<Storage> Storages { get; set; }
-=======
         public List<Client> Clients { get; set; }
->>>>>>> Lab5Base
 
         private DataListSingleton()
         {
             Ingredients = new List<Ingredient>();
             Orders = new List<Order>();
             Pizzas = new List<Pizza>();
-<<<<<<< HEAD
             Storages = new List<Storage>();
-=======
             Clients = new List<Client>();
->>>>>>> Lab5Base
         }
 
         public static DataListSingleton GetInstance()

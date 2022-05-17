@@ -25,10 +25,10 @@ namespace PizzeriaRestApi.Controllers
         [HttpGet]
         public List<IngredientViewModel> GetIngredientsList() => ingredientLogic.Read(null)?.ToList();
         [HttpPost]
-        public void CreateUpdateWarehouse(StorageBindingModel model) => storageLogic.CreateOrUpdate(model);
+        public void CreateUpdateStorage(StorageBindingModel model) => storageLogic.CreateOrUpdate(model);
         [HttpPost]
-        public void DeleteWarehouse(StorageBindingModel model) => storageLogic.Delete(model);
+        public void DeleteStorage(StorageBindingModel model) => storageLogic.Delete(model);
         [HttpPost]
-        public void AddIngrdientStorage(ReplenishStorageBindingModel model) => storageLogic.Replenishment(new ReplenishStorageBindingModel { StorageId = model.StorageId }, model.IngredientId, model.Count);
+        public void ReplenishmentStorage(ReplenishStorageBindingModel model) => storageLogic.Replenishment(new ReplenishStorageBindingModel { StorageId = model.StorageId, IngredientId = model.IngredientId, Count = model.Count }, model.IngredientId, model.Count);
     }
 }

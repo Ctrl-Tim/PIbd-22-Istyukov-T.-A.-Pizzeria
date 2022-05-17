@@ -18,11 +18,9 @@ namespace PizzeriaFileImplement
 
         private readonly string PizzaFileName = "Pizza.xml";
 
-<<<<<<< HEAD
         private readonly string StorageFileName = "Storage.xml";
-=======
+
         private readonly string ClientFileName = "Client.xml";
->>>>>>> Lab5Base
 
         public List<Ingredient> Ingredients { get; set; }
 
@@ -30,22 +28,17 @@ namespace PizzeriaFileImplement
 
         public List<Pizza> Pizzas { get; set; }
 
-<<<<<<< HEAD
         public List<Storage> Storages { get; set; }
-=======
+
         public List<Client> Clients { get; set; }
->>>>>>> Lab5Base
 
         private FileDataListSingleton()
         {
             Ingredients = LoadIngredients();
             Orders = LoadOrders();
             Pizzas = LoadPizzas();
-<<<<<<< HEAD
             Storages = LoadStorages();
-=======
             Clients = LoadClients();
->>>>>>> Lab5Base
         }
 
         public static FileDataListSingleton GetInstance()
@@ -63,6 +56,7 @@ namespace PizzeriaFileImplement
             SaveIngredients();
             SaveOrders();
             SavePizzas();
+            SaveStorages();
             SaveClients();
         }
 
@@ -178,7 +172,6 @@ namespace PizzeriaFileImplement
             return list;
         }
 
-<<<<<<< HEAD
         private List<Storage> LoadStorages()
         {
             var list = new List<Storage>();
@@ -202,7 +195,12 @@ namespace PizzeriaFileImplement
                         StorageManager = elem.Element("StorageManager").Value,
                         DateCreate = DateTime.Parse(elem.Element("DateCreate").Value),
                         StorageIngredients = storIngr
-=======
+                    });
+                }
+            }
+            return list;
+        }
+
         private List<Client> LoadClients()
         {
             var list = new List<Client>();
@@ -220,7 +218,6 @@ namespace PizzeriaFileImplement
                         ClientFIO = elem.Element("ClientFIO").Value,
                         Email = elem.Element("Email").Value,
                         Password = elem.Element("Password").Value,
->>>>>>> Lab5Base
                     });
                 }
             }
@@ -295,7 +292,6 @@ namespace PizzeriaFileImplement
             }
         }
 
-<<<<<<< HEAD
         private void SaveStorages()
         {
             if (Storages != null)
@@ -319,7 +315,9 @@ namespace PizzeriaFileImplement
                 }
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(StorageFileName);
-=======
+            }
+        }
+
         private void SaveClients()
         {
             if (Clients != null)
@@ -337,7 +335,6 @@ namespace PizzeriaFileImplement
 
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ClientFileName);
->>>>>>> Lab5Base
             }
         }
 
@@ -346,11 +343,8 @@ namespace PizzeriaFileImplement
             instance.SaveIngredients();
             instance.SaveOrders();
             instance.SavePizzas();
-<<<<<<< HEAD
             instance.SaveStorages();
-=======
             instance.SaveClients();
->>>>>>> Lab5Base
         }
     }
 }
