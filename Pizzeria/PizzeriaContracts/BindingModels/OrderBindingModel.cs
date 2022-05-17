@@ -10,7 +10,11 @@ namespace PizzeriaContracts.BindingModels
     {
         public int? Id { get; set; }
 
+        public int? ClientId { get; set; }
+
         public int PizzaId { get; set; }
+
+        public string ClientFIO { get; set; }
 
         public string PizzaName { get; set; }
 

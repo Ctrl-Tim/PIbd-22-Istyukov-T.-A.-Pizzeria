@@ -14,20 +14,12 @@ namespace PizzeriaDatabaseImplement.Implements
         public List<OrderViewModel> GetFullList()
         {
             using var context = new PizzeriaDatabase();
-            return context.Orders.
-                Include(rec => rec.Pizza)
-                .Select(rec => new OrderViewModel
-                {
-                    Id = rec.Id,
-                    PizzaId = rec.PizzaId,
-                    PizzaName = rec.Pizza.PizzaName,
-                    Count = rec.Count,
-                    Sum = rec.Sum,
-                    Status = rec.Status.ToString(),
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement
-
-                }).ToList();
+            return context.Orders
+                .Include(rec => rec.Pizza)
+                .Include(rec => rec.Client)
+                .ToList()
+                .Select(CreateModel)
+                .ToList();
         }
 
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
@@ -37,18 +29,15 @@ namespace PizzeriaDatabaseImplement.Implements
                 return null;
             }
             using var context = new PizzeriaDatabase();
-            return context.Orders.Include(rec => rec.Pizza).Where(rec => rec.PizzaId == model.PizzaId ||
-            (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)).Select(rec => new OrderViewModel
-            {
-                Id = rec.Id,
-                PizzaId = rec.PizzaId,
-                PizzaName = rec.Pizza.PizzaName,
-                Count = rec.Count,
-                Sum = rec.Sum,
-                Status = rec.Status.ToString(),
-                DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement
-            }).ToList();
+            return context.Orders
+                .Include(rec => rec.Pizza)
+                .Include(rec => rec.Client)
+                .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+                .ToList()
+                .Select(CreateModel)
+                .ToList();
         }
         public OrderViewModel GetElement(OrderBindingModel model)
         {
@@ -57,25 +46,48 @@ namespace PizzeriaDatabaseImplement.Implements
                 return null;
             }
             using var context = new PizzeriaDatabase();
-            var order = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
-            return order != null ? CreateModel(order, context) : null;
+            var order = context.Orders
+                .Include(rec => rec.Pizza)
+                .Include(rec => rec.Client)
+                .FirstOrDefault(rec => rec.Id == model.Id);
+            return order != null ? CreateModel(order) : null;
         }
         public void Insert(OrderBindingModel model)
         {
             using var context = new PizzeriaDatabase();
-            context.Orders.Add(CreateModel(model, new Order()));
-            context.SaveChanges();
+            using var transaction = context.Database.BeginTransaction();
+            try
+            {
+                context.Orders.Add(CreateModel(model, new Order()));
+                context.SaveChanges();
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
         public void Update(OrderBindingModel model)
         {
             using var context = new PizzeriaDatabase();
-            var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element == null)
+            using var transaction = context.Database.BeginTransaction();
+            try
             {
-                throw new Exception("Элемент не найден");
+                var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+                if (element == null)
+                {
+                    throw new Exception("Элемент не найден");
+                }
+                CreateModel(model, element);
+                context.SaveChanges();
+                transaction.Commit();
             }
-            CreateModel(model, element);
-            context.SaveChanges();
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
         public void Delete(OrderBindingModel model)
         {
@@ -94,6 +106,7 @@ namespace PizzeriaDatabaseImplement.Implements
 
         private Order CreateModel(OrderBindingModel model, Order order)
         {
+            order.ClientId = (int)model.ClientId;
             order.PizzaId = model.PizzaId;
             order.Sum = model.Sum;
             order.Count = model.Count;
@@ -104,13 +117,15 @@ namespace PizzeriaDatabaseImplement.Implements
             return order;
         }
 
-        public OrderViewModel CreateModel(Order order, PizzeriaDatabase context)
+        public OrderViewModel CreateModel(Order order)
         {
             return new OrderViewModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
+                ClientFIO = order.Client.ClientFIO,
                 PizzaId = order.PizzaId,
-                PizzaName = context.Pizzas.FirstOrDefault(rec => rec.Id == order.PizzaId)?.PizzaName,
+                PizzaName = order.Pizza.PizzaName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status.ToString(),
