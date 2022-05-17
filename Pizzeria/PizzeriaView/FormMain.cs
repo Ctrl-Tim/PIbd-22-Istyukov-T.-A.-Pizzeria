@@ -152,7 +152,6 @@ namespace PizzeriaView
             form.ShowDialog();
         }
 
-<<<<<<< HEAD
         private void StoragesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
@@ -172,11 +171,11 @@ namespace PizzeriaView
         private void OrdersDateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormReportOrdersByDate>();
-=======
+        }
+
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormClients>();
->>>>>>> Lab5Base
             form.ShowDialog();
         }
     }

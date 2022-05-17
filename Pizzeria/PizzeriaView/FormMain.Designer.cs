@@ -70,11 +70,8 @@ namespace PizzeriaView
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ингредиентыToolStripMenuItem,
             this.пиццыToolStripMenuItem,
-<<<<<<< HEAD
             this.складыToolStripMenuItem});
-=======
             this.клиентыToolStripMenuItem1});
->>>>>>> Lab5Base
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -269,14 +266,11 @@ namespace PizzeriaView
         private System.Windows.Forms.ToolStripMenuItem списокКомпонентовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem компонентыПоИзделиямToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
-<<<<<<< HEAD
         private System.Windows.Forms.ToolStripMenuItem складыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пополнениеСкладаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокСкладовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ингредиентыПоСкладамToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокЗаказовПоДатамToolStripMenuItem;
-=======
         private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem1;
->>>>>>> Lab5Base
     }
 }
