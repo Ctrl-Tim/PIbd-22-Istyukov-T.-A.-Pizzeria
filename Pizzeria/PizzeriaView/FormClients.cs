@@ -24,12 +24,13 @@ namespace PizzeriaView
 
         private void LoadData()
         {
-            var list = _logic.Read(null);
-            if (list != null)
+            try
             {
-                dataGridViewClients.DataSource = list;
-                dataGridViewClients.Columns[0].Visible = false;
-                dataGridViewClients.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                Program.ConfigGrid(_logic.Read(null), dataGridViewClients);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
