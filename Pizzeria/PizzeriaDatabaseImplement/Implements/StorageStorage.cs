@@ -13,13 +13,13 @@ namespace PizzeriaDatabaseImplement.Implements
     {
         public List<StorageViewModel> GetFullList()
         {
-            using (var context = new PizzeriaDatabase())
-            {
-                return context.Storages.Include(rec => rec.StorageIngredients).ThenInclude(rec => rec.Ingredient)
-                    .ToList()
-                    .Select(CreateModel)
-                    .ToList();
-            }
+            using var context = new PizzeriaDatabase();
+            return context.Storages
+                .Include(rec => rec.StorageIngredients)
+                .ThenInclude(rec => rec.Ingredient)
+                .ToList()
+                .Select(CreateModel)
+                .ToList();
         }
         public List<StorageViewModel> GetFilteredList(StorageBindingModel model)
         {
@@ -27,13 +27,14 @@ namespace PizzeriaDatabaseImplement.Implements
             {
                 return null;
             }
-            using (var context = new PizzeriaDatabase())
-            {
-                return context.Storages
-                    .Include(rec => rec.StorageIngredients)
-                    .ThenInclude(rec => rec.Ingredient)
-                    .Where(rec => rec.StorageName.Contains(model.StorageName)).ToList().Select(CreateModel).ToList();
-            }
+            using var context = new PizzeriaDatabase();
+            return context.Storages
+                .Include(rec => rec.StorageIngredients)
+                .ThenInclude(rec => rec.Ingredient)
+                .Where(rec => rec.StorageName.Contains(model.StorageName))
+                .ToList()
+                .Select(CreateModel)
+                .ToList();
         }
         public StorageViewModel GetElement(StorageBindingModel model)
         {
@@ -41,11 +42,14 @@ namespace PizzeriaDatabaseImplement.Implements
             {
                 return null;
             }
-            using (var context = new PizzeriaDatabase())
-            {
-                var storage = context.Storages.Include(rec => rec.StorageIngredients).ThenInclude(rec => rec.Ingredient).FirstOrDefault(rec => rec.StorageName == model.StorageName || rec.Id == model.Id);
-                return storage != null ? CreateModel(storage) : null;
-            }
+
+            using var context = new PizzeriaDatabase();
+            var storage = context.Storages
+                .Include(rec => rec.StorageIngredients)
+                .ThenInclude(rec => rec.Ingredient)
+                .FirstOrDefault(rec => rec.StorageName == model.StorageName || rec.Id == model.Id);
+
+            return storage != null ? CreateModel(storage) : null;
         }
 
         public void Insert(StorageBindingModel model)
@@ -157,7 +161,8 @@ namespace PizzeriaDatabaseImplement.Implements
                 StorageName = storage.StorageName,
                 StorageManager = storage.StorageManager,
                 DateCreate = storage.DateCreate,
-                StorageIngredients = storage.StorageIngredients.ToDictionary(recPC => recPC.IngredientId, recPC => (recPC.Ingredient?.IngredientName, recPC.Count))
+                StorageIngredients = storage.StorageIngredients
+                    .ToDictionary(recPC => recPC.IngredientId, recPC => (recPC.Ingredient?.IngredientName, recPC.Count))
             };
         }
 

@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using M6T.Core.TupleModelBinder;
+
 
 namespace PizzeriaRestApi
 {
@@ -35,10 +38,14 @@ namespace PizzeriaRestApi
             services.AddTransient<IStorageLogic, StorageLogic>();
             services.AddTransient<IIngredientLogic, IngredientLogic>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PizzeriaRestApi", Version = "v1" });
+            });
+            services.AddMvc(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new TupleModelBinderProvider());
             });
         }
 

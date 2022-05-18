@@ -143,7 +143,7 @@ namespace PizzeriaStorageApp.Controllers
             StorageViewModel storage = APIClient.GetRequest<StorageViewModel>($"api/Storage/GetStorage?storageId={storageId}");
             ViewBag.StorageName = storage.StorageName;
             ViewBag.StorageManager = storage.StorageManager;
-            ViewBag.IngredientsStorage = storage.StorageIngredients;
+            ViewBag.StorageIngredients = storage.StorageIngredients;
             return View();
         }
 
