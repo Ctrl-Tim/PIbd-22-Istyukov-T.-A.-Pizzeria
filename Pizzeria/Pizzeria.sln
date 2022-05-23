@@ -13,12 +13,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaFileImplement", "Pi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaDatabaseImplement", "PizzeriaDatabaseImplement\PizzeriaDatabaseImplement.csproj", "{983C3DCC-9801-4585-BE1F-89652948FEE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzeriaView", "PizzeriaView\PizzeriaView.csproj", "{70FFDEDF-551B-4161-83D6-3A73990D1005}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaView", "PizzeriaView\PizzeriaView.csproj", "{70FFDEDF-551B-4161-83D6-3A73990D1005}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2DB22764-ED2E-468F-9185-FD3A7B601FAC} = {2DB22764-ED2E-468F-9185-FD3A7B601FAC}
 		{42C25CCB-B506-4F47-9D94-1970C30412D8} = {42C25CCB-B506-4F47-9D94-1970C30412D8}
 		{983C3DCC-9801-4585-BE1F-89652948FEE7} = {983C3DCC-9801-4585-BE1F-89652948FEE7}
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaRestApi", "PizzeriaRestApi\PizzeriaRestApi.csproj", "{BBE12BEF-DC39-463C-9A5A-0C27B195E631}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzeriaClientApp", "PizzeriaClientApp\PizzeriaClientApp.csproj", "{DC6D2AC3-1918-4330-92B8-C109531C72CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzeriaStorageApp", "PizzeriaStorageApp\PizzeriaStorageApp.csproj", "{D6D8EF0C-D64F-4331-929B-A3533346E543}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +56,18 @@ Global
 		{70FFDEDF-551B-4161-83D6-3A73990D1005}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70FFDEDF-551B-4161-83D6-3A73990D1005}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70FFDEDF-551B-4161-83D6-3A73990D1005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBE12BEF-DC39-463C-9A5A-0C27B195E631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE12BEF-DC39-463C-9A5A-0C27B195E631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE12BEF-DC39-463C-9A5A-0C27B195E631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE12BEF-DC39-463C-9A5A-0C27B195E631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6D2AC3-1918-4330-92B8-C109531C72CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6D2AC3-1918-4330-92B8-C109531C72CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6D2AC3-1918-4330-92B8-C109531C72CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6D2AC3-1918-4330-92B8-C109531C72CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6D8EF0C-D64F-4331-929B-A3533346E543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D8EF0C-D64F-4331-929B-A3533346E543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6D8EF0C-D64F-4331-929B-A3533346E543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D8EF0C-D64F-4331-929B-A3533346E543}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

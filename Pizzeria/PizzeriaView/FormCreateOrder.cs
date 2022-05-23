@@ -14,17 +14,33 @@ namespace PizzeriaView
 
         private readonly IOrderLogic _logicO;
 
-        public FormCreateOrder(IPizzaLogic logicP, IOrderLogic logicO)
+        private readonly IClientLogic _logicC;
+
+        public FormCreateOrder(IPizzaLogic logicP, IOrderLogic logicO, IClientLogic logicC)
         {
             InitializeComponent();
             _logicP = logicP;
             _logicO = logicO;
+            _logicC = logicC;
         }
 
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
             try
             {
+                List<ClientViewModel> listClients = _logicC.Read(null);
+                if (listClients != null)
+                {
+                    comboBoxClient.DisplayMember = "ClientFIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.DataSource = listClients;
+                    comboBoxClient.SelectedItem = null;
+                }
+                else
+                {
+                    throw new Exception("Не удалось загрузить список клиентов");
+                }
+
                 List<PizzaViewModel> list = _logicP.Read(null);
                 if (list != null)
                 {
@@ -32,6 +48,10 @@ namespace PizzeriaView
                     comboBoxPizza.ValueMember = "Id";
                     comboBoxPizza.DataSource = list;
                     comboBoxPizza.SelectedItem = null;
+                }
+                else
+                {
+                    throw new Exception("Не удалось загрузить список изделий");
                 }
             }
             catch (Exception ex)
@@ -80,10 +100,16 @@ namespace PizzeriaView
                 MessageBox.Show("Выберите изделие", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     PizzaName = comboBoxPizza.Text,
                     PizzaId = Convert.ToInt32(comboBoxPizza.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),

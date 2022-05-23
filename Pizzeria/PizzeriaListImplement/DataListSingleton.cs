@@ -14,6 +14,7 @@ namespace PizzeriaListImplement
         public List<Pizza> Pizzas { get; set; }
 
         public List<Storage> Storages { get; set; }
+        public List<Client> Clients { get; set; }
 
         private DataListSingleton()
         {
@@ -21,6 +22,7 @@ namespace PizzeriaListImplement
             Orders = new List<Order>();
             Pizzas = new List<Pizza>();
             Storages = new List<Storage>();
+            Clients = new List<Client>();
         }
 
         public static DataListSingleton GetInstance()

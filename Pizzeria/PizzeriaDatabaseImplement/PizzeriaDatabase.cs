@@ -25,5 +25,7 @@ namespace PizzeriaDatabaseImplement
         public virtual DbSet<Storage> Storages { set; get; }
         
         public virtual DbSet<StorageIngredient> StorageIngredients { set; get; }
+
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }

@@ -20,6 +20,8 @@ namespace PizzeriaFileImplement
 
         private readonly string StorageFileName = "Storage.xml";
 
+        private readonly string ClientFileName = "Client.xml";
+
         public List<Ingredient> Ingredients { get; set; }
 
         public List<Order> Orders { get; set; }
@@ -28,12 +30,15 @@ namespace PizzeriaFileImplement
 
         public List<Storage> Storages { get; set; }
 
+        public List<Client> Clients { get; set; }
+
         private FileDataListSingleton()
         {
             Ingredients = LoadIngredients();
             Orders = LoadOrders();
             Pizzas = LoadPizzas();
             Storages = LoadStorages();
+            Clients = LoadClients();
         }
 
         public static FileDataListSingleton GetInstance()
@@ -51,6 +56,8 @@ namespace PizzeriaFileImplement
             SaveIngredients();
             SaveOrders();
             SavePizzas();
+            SaveStorages();
+            SaveClients();
         }
 
         private List<Ingredient> LoadIngredients()
@@ -107,6 +114,7 @@ namespace PizzeriaFileImplement
                         list.Add(new Order
                         {
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                            ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                             PizzaId = Convert.ToInt32(elem.Element("PizzaId").Value),
                             Count = Convert.ToInt32(elem.Element("Count").Value),
                             Sum = Convert.ToDecimal(elem.Element("Sum").Value),
@@ -119,6 +127,7 @@ namespace PizzeriaFileImplement
                         list.Add(new Order
                         {
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                            ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                             PizzaId = Convert.ToInt32(elem.Element("PizzaId").Value),
                             Count = Convert.ToInt32(elem.Element("Count").Value),
                             Sum = Convert.ToDecimal(elem.Element("Sum").Value),
@@ -192,6 +201,29 @@ namespace PizzeriaFileImplement
             return list;
         }
 
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientFIO = elem.Element("ClientFIO").Value,
+                        Email = elem.Element("Email").Value,
+                        Password = elem.Element("Password").Value,
+                    });
+                }
+            }
+            return list;
+        }
+
         private void SaveIngredients()
         {
             if (Ingredients != null)
@@ -219,6 +251,7 @@ namespace PizzeriaFileImplement
                 {
                     xElement.Add(new XElement("Order",
                  new XAttribute("Id", order.Id),
+                 new XElement("ClientId", order.ClientId),
                  new XElement("PizzaId", order.PizzaId),
                  new XElement("Count", order.Count),
                  new XElement("Sum", order.Sum),
@@ -285,12 +318,33 @@ namespace PizzeriaFileImplement
             }
         }
 
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("ClientFIO", client.ClientFIO),
+                    new XElement("Email", client.Email),
+                    new XElement("Password", client.Password)));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
+            }
+        }
+
         public static void Save()
         {
             instance.SaveIngredients();
             instance.SaveOrders();
             instance.SavePizzas();
             instance.SaveStorages();
+            instance.SaveClients();
         }
     }
 }

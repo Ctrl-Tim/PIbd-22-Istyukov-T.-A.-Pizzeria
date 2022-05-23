@@ -1,5 +1,4 @@
 ﻿using System;
-using PizzeriaContracts.Enums;
 
 namespace PizzeriaContracts.ViewModels
 {

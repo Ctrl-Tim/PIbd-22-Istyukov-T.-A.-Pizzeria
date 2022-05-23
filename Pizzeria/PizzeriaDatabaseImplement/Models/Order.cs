@@ -9,6 +9,9 @@ namespace PizzeriaDatabaseImplement.Models
         public int Id { get; set; }
 
         [Required]
+        public int ClientId { get; set; }
+
+        [Required]
         public int PizzaId { get; set; }
 
         [Required]
@@ -25,5 +28,7 @@ namespace PizzeriaDatabaseImplement.Models
         public DateTime? DateImplement { get; set; }
 
         public virtual Pizza Pizza { get; set; }
+
+        public virtual Client Client { get; set; }
     }
 }
