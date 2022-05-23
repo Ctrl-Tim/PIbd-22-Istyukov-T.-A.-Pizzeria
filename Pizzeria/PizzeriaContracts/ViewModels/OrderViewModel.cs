@@ -1,6 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using PizzeriaContracts.Enums;
+﻿using PizzeriaContracts.Attributes;
+using System;
+using System.Runtime.Serialization;
 
 namespace PizzeriaContracts.ViewModels
 {
@@ -9,6 +9,7 @@ namespace PizzeriaContracts.ViewModels
     /// </summary> 
     public class OrderViewModel
     {
+        [Column(title: "Номер", width: 100)]
         public int Id { get; set; }
 
         public int ClientId { get; set; }
@@ -17,28 +18,29 @@ namespace PizzeriaContracts.ViewModels
 
         public int PizzaId { get; set; }
 
-        [DisplayName("ФИО клиента")]
+        [Column(title: "Клиент", width: 150)]
         public string ClientFIO { get; set; }
 
-        [DisplayName("Исполнитель")]
+        [Column(title: "Исполнитель", width: 150)]
+        [DataMember]
         public string ImplementerFIO { get; set; }
 
-        [DisplayName("Пицца")]
+        [Column(title: "Пицца", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string PizzaName { get; set; }
 
-        [DisplayName("Количество")]
+        [Column(title: "Количество", width: 100)]
         public int Count { get; set; }
 
-        [DisplayName("Сумма")]
+        [Column(title: "Сумма", width: 50)]
         public decimal Sum { get; set; }
 
-        [DisplayName("Статус")]
+        [Column(title: "Статус", width: 100)]
         public string Status { get; set; }
 
-        [DisplayName("Дата создания")]
+        [Column(title: "Дата создания", width: 100)]
         public DateTime DateCreate { get; set; }
 
-        [DisplayName("Дата выполнения")]
+        [Column(title: "Дата выполнения", width: 100)]
         public DateTime? DateImplement { get; set; }
     }
 }

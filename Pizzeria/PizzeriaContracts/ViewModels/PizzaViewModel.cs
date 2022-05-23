@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
+using PizzeriaContracts.Attributes;
 
 namespace PizzeriaContracts.ViewModels
 {
@@ -8,12 +8,13 @@ namespace PizzeriaContracts.ViewModels
     /// </summary> 
     public class PizzaViewModel
     {
+        [Column(title: "Номер", width: 100)]
         public int Id { get; set; }
 
-        [DisplayName("Название пиццы")]
+        [Column(title: "Название пиццы", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string PizzaName { get; set; }
 
-        [DisplayName("Цена")]
+        [Column(title: "Цена", gridViewAutoSize: GridViewAutoSize.Fill)]
         public decimal Price { get; set; }
 
         public Dictionary<int, (string, int)> PizzaIngredients { get; set; }
