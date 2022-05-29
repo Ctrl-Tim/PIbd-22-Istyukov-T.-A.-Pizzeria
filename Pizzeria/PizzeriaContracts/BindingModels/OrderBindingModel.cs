@@ -14,9 +14,7 @@ namespace PizzeriaContracts.BindingModels
 
         public int PizzaId { get; set; }
 
-        public string ClientFIO { get; set; }
-
-        public string PizzaName { get; set; }
+        public int? ImplementerId { get; set; }
 
         public int Count { get; set; }
 
@@ -31,5 +29,7 @@ namespace PizzeriaContracts.BindingModels
         public DateTime? DateFrom { get; set; }
 
         public DateTime? DateTo { get; set; }
+
+        public OrderStatus? SearchStatus { get; set; }
     }
 }
