@@ -10,13 +10,8 @@ using PizzeriaDatabaseImplement;
 namespace PizzeriaDatabaseImplement.Migrations
 {
     [DbContext(typeof(PizzeriaDatabase))]
-<<<<<<<< HEAD:Pizzeria/PizzeriaDatabaseImplement/Migrations/20220517132733_InitialCreate2.Designer.cs
-    [Migration("20220517132733_InitialCreate2")]
+    [Migration("20220530204527_InitialCreate2")]
     partial class InitialCreate2
-========
-    [Migration("20220420074240_InitialCreate")]
-    partial class InitialCreate
->>>>>>>> origin/Lab6Base:Pizzeria/PizzeriaDatabaseImplement/Migrations/20220420074240_InitialCreate.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

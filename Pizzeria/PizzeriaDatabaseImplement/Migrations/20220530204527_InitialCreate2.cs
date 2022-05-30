@@ -222,11 +222,10 @@ namespace PizzeriaDatabaseImplement.Migrations
                 name: "Clients");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:Pizzeria/PizzeriaDatabaseImplement/Migrations/20220517132733_InitialCreate2.cs
-                name: "Pizzas");
-========
                 name: "Implementers");
->>>>>>>> origin/Lab6Base:Pizzeria/PizzeriaDatabaseImplement/Migrations/20220420074240_InitialCreate.cs
+
+            migrationBuilder.DropTable(
+                name: "Pizzas");
 
             migrationBuilder.DropTable(
                 name: "Ingredients");
