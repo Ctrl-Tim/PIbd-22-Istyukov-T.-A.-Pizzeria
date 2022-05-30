@@ -57,7 +57,35 @@ namespace PizzeriaBusinessLogic.BusinessLogics
 
                 // отдыхаем
                 Thread.Sleep(implementer.PauseTime);
-            } 
+            }
+
+            // ищем заказы, которым не хватает материалов
+            var ordersMaterialsRequired = await Task.Run(() => _orderLogic.Read(new OrderBindingModel
+            {
+                SearchStatus = OrderStatus.ТребуютсяМатериалы
+            }));
+            foreach (var order in ordersMaterialsRequired)
+            {
+                try
+                {
+                    _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
+                    {
+                        OrderId = order.Id,
+                        ImplementerId = implementer.Id
+                    });
+                    if (_orderLogic.Read(new OrderBindingModel { Id = order.Id })?[0].Status == "Требуются_материалы")
+                    {
+                        continue;
+                    }
+                    Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                    _orderLogic.FinishOrder(new ChangeStatusBindingModel
+                    {
+                        OrderId = order.Id
+                    });
+                    Thread.Sleep(implementer.PauseTime);
+                }
+                catch (Exception) { }
+            }
 
             await Task.Run(() =>
             {

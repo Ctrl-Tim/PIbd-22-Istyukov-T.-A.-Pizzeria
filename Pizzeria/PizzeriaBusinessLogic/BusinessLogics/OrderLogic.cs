@@ -13,6 +13,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
         private readonly IOrderStorage _orderStorage;
         private readonly IStorageStorage _storageStorage;
         private readonly IPizzaStorage _pizzaStorage;
+        private readonly object locker = new object();
 
         public OrderLogic(IOrderStorage orderStorage, IStorageStorage storageStorage, IPizzaStorage pizzaStorage)
         {
@@ -50,36 +51,42 @@ namespace PizzeriaBusinessLogic.BusinessLogics
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel{ Id = model.OrderId });
-
-            if (order == null)
+            lock (locker)
             {
-                throw new Exception("Не найден заказ");
+                OrderStatus status = OrderStatus.Выполняется;
+
+                var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+
+                if (order == null)
+                {
+                    throw new Exception("Не найден заказ");
+                }
+
+                if (order.Status != OrderStatus.Принят.ToString() && order.Status != OrderStatus.ТребуютсяМатериалы.ToString())
+                {
+                    throw new Exception("Статус заказа отличен от \"Принят\" или \"Требуются материалы\"");
+                }
+
+                var pizza = _pizzaStorage.GetElement(new PizzaBindingModel { Id = order.PizzaId });
+                if (!_storageStorage.CheckIngredientsCount(order.Count, pizza.PizzaIngredients))
+                {
+                    status = OrderStatus.ТребуютсяМатериалы;
+                    model.ImplementerId = null;
+                }
+
+                _orderStorage.Update(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    PizzaId = order.PizzaId,
+                    ClientId = order.ClientId,
+                    ImplementerId = model.ImplementerId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется
+                });
             }
-
-            if (order.Status != OrderStatus.Принят.ToString())
-            {
-                throw new Exception("Заказ не в статусе \"Принят\"");
-            }
-
-            var pizza = _pizzaStorage.GetElement(new PizzaBindingModel { Id = order.PizzaId });
-            if (!_storageStorage.CheckIngredientsCount(order.Count, pizza.PizzaIngredients))
-            {
-                throw new Exception("Недостаточно ингредиентов на складе!");
-            }
-
-            _orderStorage.Update(new OrderBindingModel
-            {
-                Id = order.Id,
-                PizzaId = order.PizzaId,
-                ClientId = order.ClientId,
-                ImplementerId = model.ImplementerId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
