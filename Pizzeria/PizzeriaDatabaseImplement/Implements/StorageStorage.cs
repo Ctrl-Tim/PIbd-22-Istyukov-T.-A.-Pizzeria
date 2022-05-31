@@ -186,7 +186,7 @@ namespace PizzeriaDatabaseImplement.Implements
                             }
                             if (requiredCount > 0)
                             {
-                                throw new Exception("На складах недостаточно компонентов");
+                                return false;
                             }
                         }
                         context.SaveChanges();

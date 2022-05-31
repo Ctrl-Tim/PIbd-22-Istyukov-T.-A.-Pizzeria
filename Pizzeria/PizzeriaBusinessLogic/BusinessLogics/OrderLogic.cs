@@ -84,7 +84,7 @@ namespace PizzeriaBusinessLogic.BusinessLogics
                     Sum = order.Sum,
                     DateCreate = order.DateCreate,
                     DateImplement = DateTime.Now,
-                    Status = OrderStatus.Выполняется
+                    Status = status
                 });
             }
         }
@@ -96,6 +96,11 @@ namespace PizzeriaBusinessLogic.BusinessLogics
             if (order == null)
             {
                 throw new Exception("Не найден заказ");
+            }
+
+            if (order.Status.Equals("ТребуютсяМатериалы"))
+            {
+                return;
             }
 
             if (order.Status != OrderStatus.Выполняется.ToString())
