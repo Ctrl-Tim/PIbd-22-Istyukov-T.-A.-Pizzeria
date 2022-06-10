@@ -22,6 +22,8 @@ namespace PizzeriaFileImplement
 
         private readonly string ClientFileName = "Client.xml";
 
+        private readonly string ImplementerFileName = "Implementer.xml";
+
         public List<Ingredient> Ingredients { get; set; }
 
         public List<Order> Orders { get; set; }
@@ -32,6 +34,8 @@ namespace PizzeriaFileImplement
 
         public List<Client> Clients { get; set; }
 
+        public List<Implementer> Implementers { get; set; }
+
         private FileDataListSingleton()
         {
             Ingredients = LoadIngredients();
@@ -39,6 +43,7 @@ namespace PizzeriaFileImplement
             Pizzas = LoadPizzas();
             Storages = LoadStorages();
             Clients = LoadClients();
+            Implementers = LoadImplementers();
         }
 
         public static FileDataListSingleton GetInstance()
@@ -58,6 +63,7 @@ namespace PizzeriaFileImplement
             SavePizzas();
             SaveStorages();
             SaveClients();
+            SaveImplementers();
         }
 
         private List<Ingredient> LoadIngredients()
@@ -224,6 +230,27 @@ namespace PizzeriaFileImplement
             return list;
         }
 
+        public List<Implementer> LoadImplementers()
+        {
+            var list = new List<Implementer>();
+            if (File.Exists(ImplementerFileName))
+            {
+                var xDocument = XDocument.Load(ImplementerFileName);
+                var xElements = xDocument.Root.Elements("Implementer").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Implementer
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ImplementerFIO = elem.Element("ImplementerFIO").Value,
+                        WorkingTime = Convert.ToInt32(elem.Element("WorkingTime").Value),
+                        PauseTime = Convert.ToInt32(elem.Element("PauseTime").Value)
+                    });
+                }
+            }
+            return list;
+        }
+
         private void SaveIngredients()
         {
             if (Ingredients != null)
@@ -338,6 +365,24 @@ namespace PizzeriaFileImplement
             }
         }
 
+        private void SaveImplementers()
+        {
+            if (Implementers != null)
+            {
+                var xElement = new XElement("Implementers");
+                foreach (var implementer in Implementers)
+                {
+                    xElement.Add(new XElement("Implementer"),
+                        new XAttribute("Id", implementer.Id),
+                        new XElement("ImplementerFIO", implementer.ImplementerFIO),
+                        new XElement("WorkTime", implementer.WorkingTime),
+                        new XElement("PauseTime", implementer.PauseTime));
+                }
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(ImplementerFileName);
+            }
+        }
+
         public static void Save()
         {
             instance.SaveIngredients();
@@ -345,6 +390,7 @@ namespace PizzeriaFileImplement
             instance.SavePizzas();
             instance.SaveStorages();
             instance.SaveClients();
+            instance.SaveImplementers();
         }
     }
 }

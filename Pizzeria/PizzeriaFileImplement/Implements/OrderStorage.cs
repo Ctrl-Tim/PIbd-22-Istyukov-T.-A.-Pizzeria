@@ -33,10 +33,10 @@ namespace PizzeriaFileImplement.Implements
             }
             return source.Orders
             .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
-              (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-              (model.ClientId.HasValue && rec.ClientId == model.ClientId))
-            .Select(CreateModel)
-            .ToList();
+             (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+             (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+             .Select(CreateModel)
+             .ToList();
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -86,6 +86,7 @@ namespace PizzeriaFileImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.ClientId = (int)model.ClientId;
+            order.ImplementerId = (int)model.ImplementerId;
             order.PizzaId = model.PizzaId;
             order.Count = model.Count;
             order.Sum = model.Sum;
@@ -97,15 +98,15 @@ namespace PizzeriaFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-            string PizzaName = source.Pizzas.FirstOrDefault(rec => rec.Id == order.PizzaId).PizzaName;
-
             return new OrderViewModel
             {
                 Id = order.Id,
                 ClientId = order.ClientId,
                 ClientFIO = source.Clients.FirstOrDefault(rec => rec.Id == order.ClientId)?.ClientFIO,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = source.Implementers.FirstOrDefault(rec => rec.Id == order.ImplementerId)?.ImplementerFIO,
                 PizzaId = order.PizzaId,
-                PizzaName = PizzaName,
+                PizzaName = source.Pizzas.FirstOrDefault(rec => rec.Id == order.PizzaId).PizzaName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status.ToString(),

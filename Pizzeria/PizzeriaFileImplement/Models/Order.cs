@@ -9,6 +9,8 @@ namespace PizzeriaFileImplement.Models
 
         public int ClientId { get; set; }
 
+        public int ImplementerId { get; set; }
+
         public int PizzaId { get; set; }
 
         public int Count { get; set; }
